@@ -1,4 +1,4 @@
-package com.iwillfailyou.nullfree;
+package com.iwillfailyou;
 
 public class IwfyException extends Exception {
 

@@ -1,4 +1,4 @@
-package com.nikialeksey.nullfree.db;
+package com.iwillfailyou.nullfree.db;
 
 public class DbException extends Exception {
     public DbException(String message) {

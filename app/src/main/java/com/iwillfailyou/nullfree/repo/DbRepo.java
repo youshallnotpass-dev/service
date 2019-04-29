@@ -1,9 +1,9 @@
-package com.nikialeksey.nullfree.repo;
+package com.iwillfailyou.nullfree.repo;
 
-import com.nikialeksey.nullfree.IwfyException;
-import com.nikialeksey.nullfree.db.Db;
-import com.nikialeksey.nullfree.db.DbException;
-import com.nikialeksey.nullfree.db.QueryResult;
+import com.iwillfailyou.IwfyException;
+import com.iwillfailyou.nullfree.db.Db;
+import com.iwillfailyou.nullfree.db.DbException;
+import com.iwillfailyou.nullfree.db.QueryResult;
 import org.takes.misc.Sprintf;
 
 import java.sql.ResultSet;

@@ -1,4 +1,4 @@
-package com.nikialeksey.nullfree.db;
+package com.iwillfailyou.nullfree.db;
 
 import org.hamcrest.core.IsEqual;
 import org.junit.Assert;

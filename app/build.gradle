@@ -16,4 +16,10 @@ dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.12'
 }
 
-mainClassName = 'com.nikialeksey.nullfree.Main'
+mainClassName = 'com.iwillfailyou.App'
+
+task fatJar(type: Jar) {
+    classifier = 'all'
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}

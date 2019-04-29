@@ -1,7 +1,7 @@
-package com.nikialeksey.nullfree.repo;
+package com.iwillfailyou.nullfree.repo;
 
-import com.nikialeksey.nullfree.IwfyException;
-import com.nikialeksey.nullfree.db.Db;
+import com.iwillfailyou.IwfyException;
+import com.iwillfailyou.nullfree.db.Db;
 
 public class DbRepos implements Repos {
 

@@ -1,6 +1,6 @@
-package com.nikialeksey.nullfree.repo;
+package com.iwillfailyou.nullfree.repo;
 
-import com.nikialeksey.nullfree.IwfyException;
+import com.iwillfailyou.IwfyException;
 
 import java.util.HashMap;
 import java.util.Map;

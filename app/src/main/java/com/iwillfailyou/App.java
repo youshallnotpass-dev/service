@@ -1,4 +1,4 @@
-package com.iwillfailyou.nullfree;
+package com.iwillfailyou;
 
 import com.iwillfailyou.nullfree.db.MigrationsDb;
 import com.iwillfailyou.nullfree.db.SimpleMigrations;
@@ -14,6 +14,8 @@ import org.takes.facets.fallback.FbStatus;
 import org.takes.facets.fallback.TkFallback;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
+import org.takes.http.Exit;
+import org.takes.http.FtBasic;
 import org.takes.rs.RsText;
 
 import java.io.File;
@@ -63,5 +65,12 @@ public class App implements Take {
     @Override
     public Response act(final Request req) throws IOException {
         return origin.act(req);
+    }
+
+    public static void main(final String... args) throws Exception {
+        new FtBasic(
+            new App(),
+            8080
+        ).start(Exit.NEVER);
     }
 }

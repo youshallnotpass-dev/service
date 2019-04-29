@@ -1,4 +1,4 @@
-package com.nikialeksey.nullfree.db;
+package com.iwillfailyou.nullfree.db;
 
 public interface Migration {
     int number();

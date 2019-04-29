@@ -1,6 +1,6 @@
-package com.nikialeksey.nullfree.repo;
+package com.iwillfailyou.nullfree.repo;
 
-import com.nikialeksey.nullfree.IwfyException;
+import com.iwillfailyou.IwfyException;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.takes.Response;
 import org.takes.facets.fork.RqRegex;

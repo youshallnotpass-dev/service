@@ -1,4 +1,4 @@
-package com.iwillfailyou.nullfree;
+package com.iwillfailyou;
 
 import com.nikialeksey.nullfree.JavaSourceFileFactory;
 import com.nikialeksey.nullfree.ShieldsIoBadge;
@@ -22,7 +22,7 @@ import java.net.URL;
 public class AppTest {
 
     @Test
-    public void checkSystemWithCurrentProject() throws Exception {
+    public void checkNullfreeCurrentProject() throws Exception {
         final String user = "user";
         final String repo = "repo";
         new FtRemote(new App()).exec((final URI home) -> {
