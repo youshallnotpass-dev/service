@@ -1,0 +1,13 @@
+plugins {
+    id 'com.nikialeksey.nullfree' version '0.0.2'
+}
+
+allprojects {
+    ext {
+        group = 'com.iwillfailyou'
+        version = '0.0.2'
+    }
+    repositories {
+        mavenCentral()
+    }
+}
