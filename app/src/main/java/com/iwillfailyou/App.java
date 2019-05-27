@@ -1,5 +1,6 @@
 package com.iwillfailyou;
 
+import com.iwillfailyou.nullfree.TkIndex;
 import com.iwillfailyou.nullfree.db.MigrationsDb;
 import com.iwillfailyou.nullfree.db.SimpleMigrations;
 import com.iwillfailyou.nullfree.db.SqliteDb;
@@ -29,7 +30,7 @@ public class App implements Take {
         this(
             new TkFallback(
                 new TkFork(
-                    new FkRegex("/nullfree(/)?", "Nullfree"),
+                    new FkRegex("/nullfree(/)?", new TkIndex()),
                     new FkRegex(
                         "/nullfree/.+",
                         new TkFork(
