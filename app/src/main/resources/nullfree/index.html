@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Nullfree</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css"
+    />
+    <!-- @todo #1:30m Add opengraph tags -->
+    <style type="text/css">
+      #readme {
+        display: grid;
+        grid-template-columns: minmax(1.2rem, 1fr) minmax(auto, 80ch) minmax(1.2rem, 1fr);
+      }
+      #readme * {
+        grid-column: 2;
+      }
+    </style>
+  </head>
+  <body>
+    <article id="content">
+      <div id="readme" class="markdown-body"></div>
+    </article>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js"></script>
+    <script>
+      $(function () {
+        fetch('https://raw.githubusercontent.com/nikialeksey/nullfree/master/readme.md')
+          .then(function (response) {
+            return response.text();
+          })
+          .then(function (readme) {
+            $('#readme').html(
+              new showdown.Converter().makeHtml(
+                readme
+              )
+            )
+          });
+      });
+    </script>
+  </body>
+</html>
