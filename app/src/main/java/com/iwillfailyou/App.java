@@ -1,12 +1,12 @@
 package com.iwillfailyou;
 
-import com.iwillfailyou.nullfree.TkIndex;
 import com.iwillfailyou.nullfree.db.MigrationsDb;
 import com.iwillfailyou.nullfree.db.SimpleMigrations;
 import com.iwillfailyou.nullfree.db.SqliteDb;
 import com.iwillfailyou.nullfree.migrations.Migration0;
 import com.iwillfailyou.nullfree.repo.DbRepos;
 import com.iwillfailyou.nullfree.repo.RepoInfo;
+import com.iwillfailyou.readme.TkReadme;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -21,6 +21,8 @@ import org.takes.rs.RsText;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class App implements Take {
 
@@ -30,7 +32,14 @@ public class App implements Take {
         this(
             new TkFallback(
                 new TkFork(
-                    new FkRegex("/nullfree(/)?", new TkIndex()),
+                    new FkRegex(
+                        "/nullfree(/)?",
+                        new TkReadme(
+                            () -> new URL("https://raw.githubusercontent.com/nikialeksey/nullfree/master/readme.md"),
+                            "Nullfree",
+                            "https://github.com/nikialeksey/nullfree/"
+                        )
+                    ),
                     new FkRegex(
                         "/nullfree/.+",
                         new TkFork(

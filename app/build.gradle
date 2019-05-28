@@ -11,6 +11,8 @@ sourceCompatibility = 1.8
 
 dependencies {
     implementation 'org.takes:takes:1.16'
+    implementation 'org.apache.velocity:velocity-engine-core:2.1'
+    implementation 'com.atlassian.commonmark:commonmark:0.12.1'
     implementation 'commons-io:commons-io:2.6'
     implementation 'org.xerial:sqlite-jdbc:3.27.2.1'
     testImplementation 'com.nikialeksey:nullfree:0.0.2'
