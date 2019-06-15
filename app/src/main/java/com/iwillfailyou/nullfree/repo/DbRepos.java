@@ -1,6 +1,5 @@
 package com.iwillfailyou.nullfree.repo;
 
-import com.iwillfailyou.IwfyException;
 import com.iwillfailyou.nullfree.db.Db;
 
 public class DbRepos implements Repos {
@@ -12,7 +11,7 @@ public class DbRepos implements Repos {
     }
 
     @Override
-    public Repo repo(final String path) throws IwfyException {
+    public Repo repo(final String path) {
         return new DbRepo(db, path);
     }
 }

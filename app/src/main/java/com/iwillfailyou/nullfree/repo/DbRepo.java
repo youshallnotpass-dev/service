@@ -1,9 +1,12 @@
 package com.iwillfailyou.nullfree.repo;
 
 import com.iwillfailyou.IwfyException;
+import com.iwillfailyou.nullfree.NullfreeBadge;
 import com.iwillfailyou.nullfree.db.Db;
 import com.iwillfailyou.nullfree.db.DbException;
 import com.iwillfailyou.nullfree.db.QueryResult;
+import com.iwillfailyou.nullfree.nulls.DbNulls;
+import com.iwillfailyou.nullfree.nulls.Nulls;
 import org.takes.misc.Sprintf;
 
 import java.sql.ResultSet;
@@ -47,5 +50,15 @@ public class DbRepo implements Repo {
                 e
             );
         }
+    }
+
+    @Override
+    public Nulls nulls() {
+        return new DbNulls(db, path);
+    }
+
+    @Override
+    public void calcBadge() throws IwfyException {
+        updateBadge(new NullfreeBadge(nulls()).asString());
     }
 }

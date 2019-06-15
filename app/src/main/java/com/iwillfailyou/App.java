@@ -1,9 +1,11 @@
 package com.iwillfailyou;
 
+import com.iwillfailyou.nullfree.db.Db;
 import com.iwillfailyou.nullfree.db.MigrationsDb;
 import com.iwillfailyou.nullfree.db.SimpleMigrations;
 import com.iwillfailyou.nullfree.db.SqliteDb;
 import com.iwillfailyou.nullfree.migrations.Migration0;
+import com.iwillfailyou.nullfree.migrations.Migration1;
 import com.iwillfailyou.nullfree.repo.DbRepos;
 import com.iwillfailyou.nullfree.repo.RepoInfo;
 import com.iwillfailyou.readme.TkReadme;
@@ -28,7 +30,7 @@ public class App implements Take {
 
     private final Take origin;
 
-    public App() {
+    public App(final Db db) {
         this(
             new TkFallback(
                 new TkFork(
@@ -48,11 +50,12 @@ public class App implements Take {
                                 new RepoInfo(
                                     new DbRepos(
                                         new MigrationsDb(
-                                            new SqliteDb(new File("./iwfy.db")),
+                                            db,
                                             new SimpleMigrations(
-                                                new Migration0()
+                                                new Migration0(),
+                                                new Migration1()
                                             ),
-                                            1
+                                            2
                                         )
                                     )
                                 )
@@ -79,7 +82,7 @@ public class App implements Take {
 
     public static void main(final String... args) throws Exception {
         new FtBasic(
-            new App(),
+            new App(new SqliteDb(new File("./iwfy.db"))),
             8080
         ).start(Exit.NEVER);
     }
