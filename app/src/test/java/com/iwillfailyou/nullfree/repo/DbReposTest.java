@@ -7,6 +7,7 @@ import com.iwillfailyou.nullfree.db.SimpleMigrations;
 import com.iwillfailyou.nullfree.db.SqliteDb;
 import com.iwillfailyou.nullfree.migrations.Migration0;
 import com.iwillfailyou.nullfree.migrations.Migration1;
+import com.iwillfailyou.nullfree.migrations.Migration2;
 import org.hamcrest.core.IsEqual;
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,32 +15,31 @@ import org.junit.Test;
 public class DbReposTest {
 
     @Test
-    public void okAfterSecondMigration() throws Exception {
+    public void okAfterThirdMigration() throws Exception {
         final Db db = new SqliteDb();
 
-        final Repos firstMigration = new DbRepos(
-            new MigrationsDb(
-                db,
-                new SimpleMigrations(
-                    new Migration0()
-                ),
-                1
-            )
+        final MigrationsDb firstMigration = new MigrationsDb(
+            db,
+            new SimpleMigrations(
+                new Migration0()
+            ),
+            1
         );
-        firstMigration.repo("repo1").updateBadge("badge1");
+        firstMigration.write("INSERT INTO repo (path, badgeUrl) VALUES(?, ?)", new String[]{"repo1", "badge1"});
 
-        final Repos secondMigration = new DbRepos(
+        final Repos thirdMigration = new DbRepos(
             new MigrationsDb(
                 db,
                 new SimpleMigrations(
                     new Migration0(),
-                    new Migration1()
+                    new Migration1(),
+                    new Migration2()
                 ),
-                2
+                3
             )
         );
 
-        secondMigration.repo("repo1").updateBadge("badge2");
+        thirdMigration.repo("repo1").updateBadge("badge2");
 
         final QueryResult result = db.read("SELECT * FROM repo", new String[]{});
         Assert.assertThat(result.rs().next(), IsEqual.equalTo(true));
@@ -54,9 +54,10 @@ public class DbReposTest {
                 db,
                 new SimpleMigrations(
                     new Migration0(),
-                    new Migration1()
+                    new Migration1(),
+                    new Migration2()
                 ),
-                2
+                3
             )
         );
         repos.repo("repo1").updateBadge("badge1");
@@ -76,9 +77,10 @@ public class DbReposTest {
                 db,
                 new SimpleMigrations(
                     new Migration0(),
-                    new Migration1()
+                    new Migration1(),
+                    new Migration2()
                 ),
-                2
+                3
             )
         );
         final String repoId = "repo1";

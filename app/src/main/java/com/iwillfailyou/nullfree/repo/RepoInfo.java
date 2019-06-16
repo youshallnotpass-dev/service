@@ -38,6 +38,14 @@ public class RepoInfo implements TkRegex {
                 if (badgeUrl.iterator().hasNext()) {
                     repo.updateBadge(badgeUrl.iterator().next());
                 } else {
+                    final Iterator<String> thresholdIterator = form.param("threshold").iterator();
+                    final int threshold;
+                    if (thresholdIterator.hasNext()) {
+                        threshold = Integer.parseInt(thresholdIterator.next());
+                    } else {
+                        threshold = 0;
+                    }
+                    repo.updateThreshold(threshold);
                     final Nulls repoNulls = repo.nulls();
                     repoNulls.clear();
                     final Iterable<String> nulls = form.param("null");

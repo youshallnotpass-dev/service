@@ -90,20 +90,72 @@ public class AppTest {
 
                 final HttpPost sendDescription = new HttpPost(queryUrl.toURI());
                 sendDescription.setEntity(new UrlEncodedFormEntity(form, Consts.UTF_8));
-                httpClient.execute(sendDescription);
+                final HttpResponse sendResponse = httpClient.execute(sendDescription);
+                Assert.assertThat(
+                    EntityUtils.toString(sendResponse.getEntity()),
+                    sendResponse.getStatusLine().getStatusCode(),
+                    IsEqual.equalTo(HttpURLConnection.HTTP_OK)
+                );
 
                 final HttpResponse response = httpClient.execute(
                     new HttpGet(queryUrl.toURI()),
                     HttpClientContext.create()
                 );
 
+                final String responseEntity = EntityUtils.toString(response.getEntity());
                 Assert.assertThat(
+                    responseEntity,
                     response.getStatusLine().getStatusCode(),
                     IsEqual.equalTo(HttpURLConnection.HTTP_OK)
                 );
                 Assert.assertThat(
-                    EntityUtils.toString(response.getEntity()),
+                    responseEntity,
                     StringContains.containsString("declined")
+                );
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    @Test
+    public void sendNullDescriptionsWithThreshold() throws Exception {
+        final String user = "user";
+        final String repo = "repo";
+        new FtRemote(new App(new SqliteDb())).exec((final URI home) -> {
+            try (
+                final CloseableHttpClient httpClient = HttpClients.createDefault()
+            ) {
+                final URL queryUrl = new URL(home.toString() + "/nullfree/" + user + "/" + repo);
+
+                final List<NameValuePair> form = new ArrayList<>();
+                form.add(new BasicNameValuePair("null", "null 1"));
+                form.add(new BasicNameValuePair("null", "null 2"));
+                form.add(new BasicNameValuePair("threshold", "2"));
+
+                final HttpPost sendDescription = new HttpPost(queryUrl.toURI());
+                sendDescription.setEntity(new UrlEncodedFormEntity(form, Consts.UTF_8));
+                final HttpResponse sendResponse = httpClient.execute(sendDescription);
+                Assert.assertThat(
+                    EntityUtils.toString(sendResponse.getEntity()),
+                    sendResponse.getStatusLine().getStatusCode(),
+                    IsEqual.equalTo(HttpURLConnection.HTTP_OK)
+                );
+
+                final HttpResponse response = httpClient.execute(
+                    new HttpGet(queryUrl.toURI()),
+                    HttpClientContext.create()
+                );
+
+                final String responseEntity = EntityUtils.toString(response.getEntity());
+                Assert.assertThat(
+                    responseEntity,
+                    response.getStatusLine().getStatusCode(),
+                    IsEqual.equalTo(HttpURLConnection.HTTP_OK)
+                );
+                Assert.assertThat(
+                    responseEntity,
+                    StringContains.containsString("approved")
                 );
             } catch (Exception e) {
                 throw new RuntimeException(e);

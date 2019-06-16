@@ -6,6 +6,7 @@ import com.iwillfailyou.nullfree.db.SimpleMigrations;
 import com.iwillfailyou.nullfree.db.SqliteDb;
 import com.iwillfailyou.nullfree.migrations.Migration0;
 import com.iwillfailyou.nullfree.migrations.Migration1;
+import com.iwillfailyou.nullfree.migrations.Migration2;
 import com.iwillfailyou.nullfree.repo.DbRepos;
 import com.iwillfailyou.nullfree.repo.RepoInfo;
 import com.iwillfailyou.readme.TkReadme;
@@ -53,9 +54,10 @@ public class App implements Take {
                                             db,
                                             new SimpleMigrations(
                                                 new Migration0(),
-                                                new Migration1()
+                                                new Migration1(),
+                                                new Migration2()
                                             ),
-                                            2
+                                            3
                                         )
                                     )
                                 )

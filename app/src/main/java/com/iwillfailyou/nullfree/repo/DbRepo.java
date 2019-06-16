@@ -25,7 +25,7 @@ public class DbRepo implements Repo {
     @Override
     public String badgeUrl() throws IwfyException {
         try (
-            final QueryResult result = db.read("SELECT * FROM repo WHERE path = ?", new String[]{path});
+            final QueryResult result = db.read("SELECT * FROM repo WHERE path = ?", new String[]{path})
         ) {
             final ResultSet rs = result.rs();
             if (!rs.next()) {
@@ -40,7 +40,28 @@ public class DbRepo implements Repo {
     @Override
     public void updateBadge(final String url) throws IwfyException {
         try {
-            db.write("INSERT OR REPLACE INTO repo VALUES(?, ?)", new String[]{path, url});
+            db.write(
+                "INSERT OR REPLACE INTO repo(path, badgeUrl, threshold) VALUES(?, ?, ?)",
+                new String[]{path, url, "0"}
+            );
+        } catch (DbException e) {
+            throw new IwfyException(
+                new Sprintf(
+                    "Can not update the badge in path '%s'",
+                    path
+                ).toString(),
+                e
+            );
+        }
+    }
+
+    @Override
+    public void updateThreshold(final int threshold) throws IwfyException {
+        try {
+            db.write(
+                "INSERT OR REPLACE INTO repo(path, badgeUrl, threshold) VALUES(?, ?, ?)",
+                new String[]{path, "", String.valueOf(threshold)}
+            );
         } catch (DbException e) {
             throw new IwfyException(
                 new Sprintf(
@@ -59,6 +80,27 @@ public class DbRepo implements Repo {
 
     @Override
     public void calcBadge() throws IwfyException {
-        updateBadge(new NullfreeBadge(nulls()).asString());
+        try (
+            final QueryResult result = db.read("SELECT * FROM repo WHERE path = ?", new String[]{path})
+        ) {
+            final ResultSet rs = result.rs();
+            if (!rs.next()) {
+                throw new IwfyException(
+                    new Sprintf(
+                        "Can not find the repo '%s'.",
+                        path
+                    ).toString()
+                );
+            }
+            updateBadge(new NullfreeBadge(nulls(), rs.getInt("threshold")).asString());
+        } catch (SQLException | DbException e) {
+            throw new IwfyException(
+                new Sprintf(
+                    "Can not calc the badge by path '%s'",
+                    path
+                ).toString(),
+                e
+            );
+        }
     }
 }
