@@ -1,13 +1,13 @@
 package com.iwillfailyou.nullfree.repo;
 
-import com.iwillfailyou.nullfree.db.Db;
-import com.iwillfailyou.nullfree.db.MigrationsDb;
-import com.iwillfailyou.nullfree.db.QueryResult;
-import com.iwillfailyou.nullfree.db.SimpleMigrations;
-import com.iwillfailyou.nullfree.db.SqliteDb;
 import com.iwillfailyou.nullfree.migrations.Migration0;
 import com.iwillfailyou.nullfree.migrations.Migration1;
 import com.iwillfailyou.nullfree.migrations.Migration2;
+import com.nikialeksey.jood.Db;
+import com.nikialeksey.jood.MigrationsDb;
+import com.nikialeksey.jood.QueryResult;
+import com.nikialeksey.jood.SimpleMigrations;
+import com.nikialeksey.jood.SqliteDb;
 import org.hamcrest.core.IsEqual;
 import org.junit.Assert;
 import org.junit.Test;

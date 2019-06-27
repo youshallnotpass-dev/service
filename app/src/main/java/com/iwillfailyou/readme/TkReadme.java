@@ -1,7 +1,7 @@
 package com.iwillfailyou.readme;
 
 import org.cactoos.Scalar;
-import org.cactoos.scalar.IoCheckedScalar;
+import org.cactoos.scalar.Checked;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
@@ -21,13 +21,13 @@ public class TkReadme implements Take {
 
     private final Parser mdParser;
     private final HtmlRenderer mdRenderer;
-    private final IoCheckedScalar<InputStream> readme;
+    private final Checked<InputStream, IOException> readme;
     private final String title;
     private final String link;
 
     public TkReadme(final Scalar<URL> readmeUrl, final String title, final String link) {
         this(
-            new IoCheckedScalar<>(() -> readmeUrl.value().openStream()),
+            new Checked<InputStream, IOException>(() -> readmeUrl.value().openStream(), IOException::new),
             title,
             link
         );
@@ -35,7 +35,7 @@ public class TkReadme implements Take {
 
     public TkReadme(final URL readmeUrl, final String title, final String link) {
         this(
-            new IoCheckedScalar<>(readmeUrl::openStream),
+            new Checked<InputStream, IOException>(readmeUrl::openStream, IOException::new),
             title,
             link
         );
@@ -43,13 +43,13 @@ public class TkReadme implements Take {
 
     public TkReadme(final String readme, final String title, final String link) {
         this(
-            new IoCheckedScalar<>(() -> new ByteArrayInputStream(readme.getBytes())),
+            new Checked<InputStream, IOException>(() -> new ByteArrayInputStream(readme.getBytes()), IOException::new),
             title,
             link
         );
     }
 
-    public TkReadme(final IoCheckedScalar<InputStream> readme, final String title, final String link) {
+    public TkReadme(final Checked<InputStream, IOException> readme, final String title, final String link) {
         this(
             Parser.builder().build(),
             HtmlRenderer.builder().build(),
@@ -62,7 +62,7 @@ public class TkReadme implements Take {
     public TkReadme(
         final Parser mdParser,
         final HtmlRenderer mdRenderer,
-        final IoCheckedScalar<InputStream> readme,
+        final Checked<InputStream, IOException> readme,
         final String title,
         final String link
     ) {

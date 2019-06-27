@@ -1,15 +1,15 @@
 package com.iwillfailyou;
 
-import com.iwillfailyou.nullfree.db.Db;
-import com.iwillfailyou.nullfree.db.MigrationsDb;
-import com.iwillfailyou.nullfree.db.SimpleMigrations;
-import com.iwillfailyou.nullfree.db.SqliteDb;
 import com.iwillfailyou.nullfree.migrations.Migration0;
 import com.iwillfailyou.nullfree.migrations.Migration1;
 import com.iwillfailyou.nullfree.migrations.Migration2;
 import com.iwillfailyou.nullfree.repo.DbRepos;
 import com.iwillfailyou.nullfree.repo.RepoInfo;
 import com.iwillfailyou.readme.TkReadme;
+import com.nikialeksey.jood.Db;
+import com.nikialeksey.jood.MigrationsDb;
+import com.nikialeksey.jood.SimpleMigrations;
+import com.nikialeksey.jood.SqliteDb;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -24,7 +24,6 @@ import org.takes.rs.RsText;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class App implements Take {

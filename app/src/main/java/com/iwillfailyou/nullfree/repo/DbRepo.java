@@ -2,11 +2,11 @@ package com.iwillfailyou.nullfree.repo;
 
 import com.iwillfailyou.IwfyException;
 import com.iwillfailyou.nullfree.NullfreeBadge;
-import com.iwillfailyou.nullfree.db.Db;
-import com.iwillfailyou.nullfree.db.DbException;
-import com.iwillfailyou.nullfree.db.QueryResult;
 import com.iwillfailyou.nullfree.nulls.DbNulls;
 import com.iwillfailyou.nullfree.nulls.Nulls;
+import com.nikialeksey.jood.Db;
+import com.nikialeksey.jood.DbException;
+import com.nikialeksey.jood.QueryResult;
 import org.takes.misc.Sprintf;
 
 import java.sql.ResultSet;

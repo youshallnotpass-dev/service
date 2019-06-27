@@ -1,8 +1,8 @@
 package com.iwillfailyou.nullfree.migrations;
 
-import com.iwillfailyou.nullfree.db.Db;
-import com.iwillfailyou.nullfree.db.DbException;
-import com.iwillfailyou.nullfree.db.Migration;
+import com.nikialeksey.jood.Db;
+import com.nikialeksey.jood.DbException;
+import com.nikialeksey.jood.Migration;
 
 public class Migration1 implements Migration {
     @Override

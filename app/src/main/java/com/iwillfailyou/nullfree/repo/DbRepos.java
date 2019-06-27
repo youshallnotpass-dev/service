@@ -1,6 +1,6 @@
 package com.iwillfailyou.nullfree.repo;
 
-import com.iwillfailyou.nullfree.db.Db;
+import com.nikialeksey.jood.Db;
 
 public class DbRepos implements Repos {
 

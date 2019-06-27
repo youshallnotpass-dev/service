@@ -1,6 +1,6 @@
 package com.iwillfailyou.nullfree.nulls;
 
-import com.iwillfailyou.nullfree.db.Db;
+import com.nikialeksey.jood.Db;
 
 public class DbNull implements Null {
     private final Db db;

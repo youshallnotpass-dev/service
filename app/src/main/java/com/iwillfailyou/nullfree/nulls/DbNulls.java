@@ -1,9 +1,9 @@
 package com.iwillfailyou.nullfree.nulls;
 
 import com.iwillfailyou.IwfyException;
-import com.iwillfailyou.nullfree.db.Db;
-import com.iwillfailyou.nullfree.db.DbException;
-import com.iwillfailyou.nullfree.db.QueryResult;
+import com.nikialeksey.jood.Db;
+import com.nikialeksey.jood.DbException;
+import com.nikialeksey.jood.QueryResult;
 import org.takes.misc.Sprintf;
 
 import java.sql.ResultSet;

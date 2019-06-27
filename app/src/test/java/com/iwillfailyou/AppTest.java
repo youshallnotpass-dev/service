@@ -1,8 +1,8 @@
 package com.iwillfailyou;
 
-import com.iwillfailyou.nullfree.db.SqliteDb;
+import com.nikialeksey.jood.SqliteDb;
 import com.nikialeksey.nullfree.SimpleNullfree;
-import com.nikialeksey.nullfree.badge.ShieldsIoBadge;
+import com.nikialeksey.nullfree.badge.SimpleBadge;
 import com.nikialeksey.nullfree.sources.SimpleSources;
 import com.nikialeksey.nullfree.sources.java.JavaSourceFileFactory;
 import org.apache.http.Consts;
@@ -43,7 +43,7 @@ public class AppTest {
                         new File("../"),
                         new JavaSourceFileFactory()
                     ),
-                    ShieldsIoBadge::new
+                    SimpleBadge::new
                 ).badge().send(
                     new URL(
                         String.format(
