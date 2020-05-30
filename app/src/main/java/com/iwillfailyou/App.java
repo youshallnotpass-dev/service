@@ -7,9 +7,10 @@ import com.iwillfailyou.nullfree.repo.DbRepos;
 import com.iwillfailyou.nullfree.repo.RepoInfo;
 import com.iwillfailyou.readme.TkReadme;
 import com.nikialeksey.jood.Db;
+import com.nikialeksey.jood.JdDb;
+import com.nikialeksey.jood.JdMigrations;
 import com.nikialeksey.jood.MigrationsDb;
-import com.nikialeksey.jood.SimpleMigrations;
-import com.nikialeksey.jood.SqliteDb;
+import org.cactoos.scalar.Solid;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -25,6 +26,7 @@ import org.takes.rs.RsText;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.DriverManager;
 
 public class App implements Take {
 
@@ -51,7 +53,7 @@ public class App implements Take {
                                     new DbRepos(
                                         new MigrationsDb(
                                             db,
-                                            new SimpleMigrations(
+                                            new JdMigrations(
                                                 new Migration0(),
                                                 new Migration1(),
                                                 new Migration2()
@@ -83,7 +85,18 @@ public class App implements Take {
 
     public static void main(final String... args) throws Exception {
         new FtBasic(
-            new App(new SqliteDb(new File("./iwfy.db"))),
+            new App(
+                new JdDb(
+                    new Solid<>(
+                        () -> DriverManager.getConnection(
+                            String.format(
+                                "jdbc:sqlite:%s",
+                                new File("./iwfy.db").getAbsolutePath()
+                            )
+                        )
+                    )
+                )
+            ),
             8080
         ).start(Exit.NEVER);
     }

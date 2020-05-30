@@ -2,7 +2,7 @@ package com.iwillfailyou;
 
 import com.nikialeksey.jood.Db;
 import com.nikialeksey.jood.QueryResult;
-import com.nikialeksey.jood.SqliteDb;
+import com.nikialeksey.jood.sql.JdSql;
 import com.nikialeksey.nullfree.SimpleNullfree;
 import com.nikialeksey.nullfree.badge.SimpleBadge;
 import com.nikialeksey.nullfree.sources.SimpleSources;
@@ -153,8 +153,9 @@ public class AppTest {
 
                 try (
                     QueryResult qr = db.read(
-                        "SELECT threshold FROM repo WHERE path = 'user/repo'",
-                        new String[]{}
+                        new JdSql(
+                            "SELECT threshold FROM repo WHERE path = 'user/repo'"
+                        )
                     )
                 ) {
                     ResultSet rs = qr.rs();

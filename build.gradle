@@ -1,5 +1,5 @@
 plugins {
-    id 'com.nikialeksey.nullfree' version '1.4.0'
+    id 'com.nikialeksey.nullfree' version '1.5.1'
 }
 
 allprojects {

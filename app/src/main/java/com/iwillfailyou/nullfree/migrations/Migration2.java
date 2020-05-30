@@ -1,8 +1,9 @@
 package com.iwillfailyou.nullfree.migrations;
 
 import com.nikialeksey.jood.Db;
-import com.nikialeksey.jood.DbException;
+import com.nikialeksey.jood.JdException;
 import com.nikialeksey.jood.Migration;
+import com.nikialeksey.jood.sql.JdSql;
 
 public class Migration2 implements Migration {
     @Override
@@ -11,10 +12,11 @@ public class Migration2 implements Migration {
     }
 
     @Override
-    public void execute(final Db db) throws DbException {
+    public void execute(final Db db) throws JdException {
         db.write(
-            "ALTER TABLE repo ADD COLUMN threshold INTEGER NOT NULL DEFAULT 0",
-            new String[]{}
+            new JdSql(
+                "ALTER TABLE repo ADD COLUMN threshold INTEGER NOT NULL DEFAULT 0"
+            )
         );
     }
 }

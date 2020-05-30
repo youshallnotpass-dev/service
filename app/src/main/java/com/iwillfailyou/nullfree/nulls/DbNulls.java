@@ -2,8 +2,10 @@ package com.iwillfailyou.nullfree.nulls;
 
 import com.iwillfailyou.IwfyException;
 import com.nikialeksey.jood.Db;
-import com.nikialeksey.jood.DbException;
+import com.nikialeksey.jood.JdException;
 import com.nikialeksey.jood.QueryResult;
+import com.nikialeksey.jood.args.StringArg;
+import com.nikialeksey.jood.sql.JdSql;
 import org.takes.misc.Sprintf;
 
 import java.sql.ResultSet;
@@ -23,9 +25,19 @@ public class DbNulls implements Nulls {
     @Override
     public void clear() throws IwfyException {
         try {
-            db.write("DELETE FROM null_description WHERE repo = ?", new String[]{repo});
-            db.write("UPDATE repo SET badgeUrl = '' WHERE path = ?", new String[]{repo});
-        } catch (DbException e) {
+            db.write(
+                new JdSql(
+                    "DELETE FROM null_description WHERE repo = ?",
+                    new StringArg(repo)
+                )
+            );
+            db.write(
+                new JdSql(
+                    "UPDATE repo SET badgeUrl = '' WHERE path = ?",
+                    new StringArg(repo)
+                )
+            );
+        } catch (JdException e) {
             throw new IwfyException(
                 new Sprintf(
                     "Can not clear the nulls for repo '%s'",
@@ -41,11 +53,15 @@ public class DbNulls implements Nulls {
         try {
             final String id = UUID.randomUUID().toString();
             db.write(
-                "INSERT OR REPLACE INTO null_description VALUES(?, ?, ?)",
-                new String[]{id, repo, description}
+                new JdSql(
+                    "INSERT OR REPLACE INTO null_description VALUES(?, ?, ?)",
+                    new StringArg(id),
+                    new StringArg(repo),
+                    new StringArg(description)
+                )
             );
             return new DbNull(db, id);
-        } catch (DbException e) {
+        } catch (JdException e) {
             throw new IwfyException(
                 new Sprintf(
                     "Can not add the null '%s' in repo '%s'",
@@ -60,14 +76,19 @@ public class DbNulls implements Nulls {
     @Override
     public int count() throws IwfyException {
         try (
-            final QueryResult result = db.read("SELECT count(*) FROM null_description WHERE repo = ?", new String[]{repo});
+            final QueryResult result = db.read(
+                new JdSql(
+                    "SELECT count(*) FROM null_description WHERE repo = ?",
+                    new StringArg(repo)
+                )
+            );
         ) {
             final ResultSet rs = result.rs();
             if (!rs.next()) {
                 throw new IwfyException("'SELECT count(*)' returned nothing.");
             }
             return rs.getInt(1);
-        } catch (SQLException | DbException e) {
+        } catch (SQLException | JdException e) {
             throw new IwfyException("Can not get the nulls count.", e);
         }
     }
