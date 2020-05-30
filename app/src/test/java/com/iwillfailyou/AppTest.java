@@ -1,5 +1,7 @@
 package com.iwillfailyou;
 
+import com.nikialeksey.jood.Db;
+import com.nikialeksey.jood.QueryResult;
 import com.nikialeksey.jood.SqliteDb;
 import com.nikialeksey.nullfree.SimpleNullfree;
 import com.nikialeksey.nullfree.badge.SimpleBadge;
@@ -27,6 +29,7 @@ import java.io.File;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -122,7 +125,8 @@ public class AppTest {
     public void sendNullDescriptionsWithThreshold() throws Exception {
         final String user = "user";
         final String repo = "repo";
-        new FtRemote(new App(new SqliteDb())).exec((final URI home) -> {
+        final Db db = new SqliteDb();
+        new FtRemote(new App(db)).exec((final URI home) -> {
             try (
                 final CloseableHttpClient httpClient = HttpClients.createDefault()
             ) {
@@ -146,6 +150,18 @@ public class AppTest {
                     new HttpGet(queryUrl.toURI()),
                     HttpClientContext.create()
                 );
+
+                try (
+                    QueryResult qr = db.read(
+                        "SELECT threshold FROM repo WHERE path = 'user/repo'",
+                        new String[]{}
+                    )
+                ) {
+                    ResultSet rs = qr.rs();
+                    Assert.assertThat(rs.next(), IsEqual.equalTo(true));
+                    final int threshold = rs.getInt("threshold");
+                    Assert.assertThat(threshold, IsEqual.equalTo(2));
+                }
 
                 final String responseEntity = EntityUtils.toString(response.getEntity());
                 Assert.assertThat(

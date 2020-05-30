@@ -41,8 +41,13 @@ public class DbRepo implements Repo {
     public void updateBadge(final String url) throws IwfyException {
         try {
             db.write(
-                "INSERT OR REPLACE INTO repo(path, badgeUrl, threshold) VALUES(?, ?, ?)",
-                new String[]{path, url, "0"}
+                "INSERT OR REPLACE INTO repo(path, badgeUrl, threshold) " +
+                    "VALUES(" +
+                    "?, " +
+                    "?, " +
+                    "IFNULL((SELECT threshold FROM repo WHERE path = ?), 0)" +
+                    ")",
+                new String[]{path, url, path}
             );
         } catch (DbException e) {
             throw new IwfyException(
@@ -59,8 +64,12 @@ public class DbRepo implements Repo {
     public void updateThreshold(final int threshold) throws IwfyException {
         try {
             db.write(
-                "INSERT OR REPLACE INTO repo(path, badgeUrl, threshold) VALUES(?, ?, ?)",
-                new String[]{path, "", String.valueOf(threshold)}
+                "INSERT OR REPLACE INTO repo(path, badgeUrl, threshold) " +
+                    "VALUES(" +
+                    "?, " +
+                    "IFNULL((SELECT badgeUrl FROM repo WHERE path = ?), ''), " +
+                    "?)",
+                new String[]{path, path, String.valueOf(threshold)}
             );
         } catch (DbException e) {
             throw new IwfyException(

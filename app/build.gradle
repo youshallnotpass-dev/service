@@ -19,6 +19,9 @@ dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.12'
 }
 
+jacoco {
+    toolVersion = "0.8.5"
+}
 jacocoTestReport {
     reports {
         xml.enabled = true
