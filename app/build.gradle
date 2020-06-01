@@ -34,8 +34,13 @@ check.dependsOn jacocoTestReport
 
 mainClassName = 'com.iwillfailyou.App'
 
-task fatJar(type: Jar) {
-    classifier = 'all'
-    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
-    with jar
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'com.iwillfailyou.App'
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
