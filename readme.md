@@ -2,10 +2,10 @@
 
 ![Elegant Objects Respected Here](http://www.elegantobjects.org/badge.svg)
 
-![nullfree status](https://iwillfailyou.com/nullfree/nikialeksey/iwillfailyou)
+![nullfree status](https://iwillfailyou.com/nullfree/iwillfailyou/service)
 
-[![Build Status](https://travis-ci.org/nikialeksey/iwillfailyou.svg?branch=master)](https://travis-ci.org/nikialeksey/iwillfailyou)
-[![codecov](https://codecov.io/gh/nikialeksey/iwillfailyou/branch/master/graph/badge.svg)](https://codecov.io/gh/nikialeksey/iwillfailyou)
+[![Build Status](https://travis-ci.com/iwillfailyou/service.svg?branch=master)](https://travis-ci.com/iwillfailyou/service)
+[![codecov](https://codecov.io/gh/iwillfailyou/service/branch/master/graph/badge.svg)](https://codecov.io/gh/iwillfailyou/service)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/nikialeksey/iwillfailyou/blob/master/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/iwillfailyou/service/blob/master/LICENSE)
 

@@ -24,7 +24,6 @@ import org.takes.http.FtBasic;
 import org.takes.rs.RsText;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.DriverManager;
 
@@ -79,7 +78,7 @@ public class App implements Take {
     }
 
     @Override
-    public Response act(final Request req) throws IOException {
+    public Response act(final Request req) throws Exception {
         return origin.act(req);
     }
 

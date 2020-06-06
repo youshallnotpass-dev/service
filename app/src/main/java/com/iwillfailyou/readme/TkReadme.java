@@ -1,20 +1,26 @@
 package com.iwillfailyou.readme;
 
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
 import org.cactoos.Scalar;
+import org.cactoos.map.MapEntry;
+import org.cactoos.map.MapOf;
 import org.cactoos.scalar.Checked;
+import org.cactoos.text.TextOf;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.rs.RsVelocity;
+import org.takes.rs.RsHtml;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.StringWriter;
 import java.net.URL;
 
 public class TkReadme implements Take {
@@ -79,15 +85,28 @@ public class TkReadme implements Take {
             final InputStream urlStream = readme.value();
             final Reader urlReader = new InputStreamReader(urlStream)
         ) {
+
             final Node document = mdParser.parseReader(urlReader);
             final String html = mdRenderer.render(document);
-
-            return new RsVelocity(
-                getClass().getClassLoader().getResourceAsStream("./readme/readme.html"),
-                new RsVelocity.Pair("readme", html),
-                new RsVelocity.Pair("title", title),
-                new RsVelocity.Pair("link", link)
+            final VelocityEngine engine = new VelocityEngine();
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            StringWriter writer = new StringWriter();
+            engine.evaluate(
+                new VelocityContext(
+                    new MapOf<>(
+                        new MapEntry<>("readme", html),
+                        new MapEntry<>("title", title),
+                        new MapEntry<>("link", link)
+                    )
+                ),
+                writer,
+                "",
+                new InputStreamReader(
+                    classLoader.getResourceAsStream("readme/readme.html")
+                )
             );
+
+            return new RsHtml(new TextOf(writer.toString()).asString());
         }
     }
 }
