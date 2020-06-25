@@ -1,5 +1,5 @@
 plugins {
-    id 'com.iwillfailyou' version '0.0.2'
+    id 'com.iwillfailyou' version '0.0.3'
 }
 
 allprojects {

@@ -70,6 +70,7 @@ public class DbNullfree implements Inspection {
                     "UPDATE nullfree SET badgeUrl = ? WHERE id = ?",
                     new StringArg(
                         new IwfyBadge(
+                            "nullfree",
                             () -> violations().count() <= threshold
                         ).asString()
                     ),

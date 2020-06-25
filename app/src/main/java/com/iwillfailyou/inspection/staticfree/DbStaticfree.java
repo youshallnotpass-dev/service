@@ -72,6 +72,7 @@ public class DbStaticfree implements Inspection {
                     "UPDATE staticfree SET badgeUrl = ? WHERE id = ?",
                     new StringArg(
                         new IwfyBadge(
+                            "staticfree",
                             () -> violations().count() <= threshold
                         ).asString()
                     ),
