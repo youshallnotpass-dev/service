@@ -1,11 +1,14 @@
 package com.iwillfailyou;
 
-import com.iwillfailyou.nullfree.migrations.Migration0;
-import com.iwillfailyou.nullfree.migrations.Migration1;
-import com.iwillfailyou.nullfree.migrations.Migration2;
-import com.iwillfailyou.nullfree.repo.DbRepos;
-import com.iwillfailyou.nullfree.repo.RepoInfo;
+import com.iwillfailyou.inspection.staticfree.TkStaticfree;
+import com.iwillfailyou.migrations.Migration0;
+import com.iwillfailyou.migrations.Migration1;
+import com.iwillfailyou.migrations.Migration2;
+import com.iwillfailyou.migrations.Migration3;
+import com.iwillfailyou.repo.DbRepos;
+import com.iwillfailyou.inspection.nullfree.TkNullfree;
 import com.iwillfailyou.readme.TkReadme;
+import com.iwillfailyou.repo.Repos;
 import com.nikialeksey.jood.Db;
 import com.nikialeksey.jood.JdDb;
 import com.nikialeksey.jood.JdMigrations;
@@ -31,10 +34,18 @@ public class App implements Take {
 
     private final Take origin;
 
-    public App(final Db db) {
+    public App(final Repos repos) {
         this(
             new TkFallback(
                 new TkFork(
+                    new FkRegex(
+                        "(/)?",
+                        new TkReadme(
+                            () -> new URL("https://raw.githubusercontent.com/iwillfailyou/service/master/readme.md"),
+                            "Iwillfailyou",
+                            "https://github.com/iwillfailyou/service"
+                        )
+                    ),
                     new FkRegex(
                         "/nullfree(/)?",
                         new TkReadme(
@@ -48,18 +59,27 @@ public class App implements Take {
                         new TkFork(
                             new FkRegex(
                                 "/nullfree/(?<user>[^/]+)/(?<repo>[^/]+)",
-                                new RepoInfo(
-                                    new DbRepos(
-                                        new MigrationsDb(
-                                            db,
-                                            new JdMigrations(
-                                                new Migration0(),
-                                                new Migration1(),
-                                                new Migration2()
-                                            ),
-                                            3
-                                        )
-                                    )
+                                new TkNullfree(
+                                    repos
+                                )
+                            )
+                        )
+                    ),
+                    new FkRegex(
+                        "/staticfree(/)?",
+                        new TkReadme(
+                            () -> new URL("https://raw.githubusercontent.com/iwillfailyou/java-staticfree/master/readme.md"),
+                            "Staticfree",
+                            "https://github.com/iwillfailyou/java-staticfree/"
+                        )
+                    ),
+                    new FkRegex(
+                        "/staticfree/.+",
+                        new TkFork(
+                            new FkRegex(
+                                "/staticfree/(?<user>[^/]+)/(?<repo>[^/]+)",
+                                new TkStaticfree(
+                                    repos
                                 )
                             )
                         )
@@ -85,12 +105,16 @@ public class App implements Take {
     public static void main(final String... args) throws Exception {
         new FtBasic(
             new App(
-                new JdDb(
-                    new Solid<>(
-                        () -> DriverManager.getConnection(
-                            String.format(
-                                "jdbc:sqlite:%s",
-                                new File("./iwfy.db").getAbsolutePath()
+                new DbRepos(
+                    new IwfyDb(
+                        new JdDb(
+                            new Solid<>(
+                                () -> DriverManager.getConnection(
+                                    String.format(
+                                        "jdbc:sqlite:%s",
+                                        new File("./iwfy.db").getAbsolutePath()
+                                    )
+                                )
                             )
                         )
                     )

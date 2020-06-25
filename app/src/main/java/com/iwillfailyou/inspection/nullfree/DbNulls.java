@@ -1,6 +1,8 @@
-package com.iwillfailyou.nullfree.nulls;
+package com.iwillfailyou.inspection.nullfree;
 
 import com.iwillfailyou.IwfyException;
+import com.iwillfailyou.inspection.Violation;
+import com.iwillfailyou.inspection.Violations;
 import com.nikialeksey.jood.Db;
 import com.nikialeksey.jood.JdException;
 import com.nikialeksey.jood.QueryResult;
@@ -12,7 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
-public class DbNulls implements Nulls {
+public class DbNulls implements Violations {
 
     private final Db db;
     private final String repo;
@@ -33,7 +35,7 @@ public class DbNulls implements Nulls {
             );
             db.write(
                 new JdSql(
-                    "UPDATE repo SET badgeUrl = '' WHERE path = ?",
+                    "UPDATE nullfree SET badgeUrl = '' WHERE repo = ?",
                     new StringArg(repo)
                 )
             );
@@ -49,7 +51,7 @@ public class DbNulls implements Nulls {
     }
 
     @Override
-    public Null add(final String description) throws IwfyException {
+    public void add(final Violation violation) throws IwfyException {
         try {
             final String id = UUID.randomUUID().toString();
             db.write(
@@ -57,16 +59,15 @@ public class DbNulls implements Nulls {
                     "INSERT OR REPLACE INTO null_description VALUES(?, ?, ?)",
                     new StringArg(id),
                     new StringArg(repo),
-                    new StringArg(description)
+                    new StringArg(violation.description())
                 )
             );
-            return new DbNull(db, id);
         } catch (JdException e) {
             throw new IwfyException(
                 new Sprintf(
                     "Can not add the null '%s' in repo '%s'",
                     repo,
-                    description
+                    violation.description()
                 ).toString(),
                 e
             );

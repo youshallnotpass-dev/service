@@ -1,10 +1,12 @@
-package com.iwillfailyou.nullfree.repo;
+package com.iwillfailyou.repo;
+
+import com.iwillfailyou.IwfyException;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public interface Repos {
-    Repo repo(String path);
+    Repo repo(String path) throws IwfyException;
 
     class Fake implements Repos {
         private final Map<String, Repo> pathToRepo;

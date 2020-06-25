@@ -1,11 +1,11 @@
 plugins {
-    id 'com.nikialeksey.nullfree' version '1.5.1'
+    id 'com.iwillfailyou' version '0.0.2'
 }
 
 allprojects {
     ext {
         group = 'com.iwillfailyou'
-        version = '0.0.3'
+        version = '0.0.4'
     }
     repositories {
         mavenCentral()

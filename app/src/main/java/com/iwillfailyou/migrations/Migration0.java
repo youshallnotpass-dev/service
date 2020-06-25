@@ -1,4 +1,4 @@
-package com.iwillfailyou.nullfree.migrations;
+package com.iwillfailyou.migrations;
 
 import com.nikialeksey.jood.Db;
 import com.nikialeksey.jood.JdException;
