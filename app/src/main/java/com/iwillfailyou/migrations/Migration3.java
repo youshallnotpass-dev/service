@@ -28,8 +28,7 @@ public class Migration3 implements Migration {
             new JdSql(
                 "INSERT INTO nullfree (id, repo, threshold, badgeUrl) " +
                     "SELECT " +
-                    "    (select " +
-                    "        hex(randomblob(4)) || " +
+                    "    (hex(randomblob(4)) || " +
                     "        '-' || " +
                     "        hex(randomblob(2)) || " +
                     "        '-' || " +
@@ -40,7 +39,7 @@ public class Migration3 implements Migration {
                     "        substr(hex(randomblob(2)), 2) || " +
                     "        '-' || " +
                     "        hex(randomblob(6))" +
-                    "    ), " +
+                    "    ) as id, " +
                     "    path, " +
                     "    threshold, " +
                     "    badgeUrl " +
