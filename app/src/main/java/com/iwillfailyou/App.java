@@ -102,6 +102,7 @@ public class App implements Take {
         return origin.act(req);
     }
 
+    @SuppressWarnings("staticfree")
     public static void main(final String... args) throws Exception {
         new FtBasic(
             new App(
