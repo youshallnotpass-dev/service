@@ -257,6 +257,10 @@ public class AppTest {
                     responseEntity,
                     StringContains.containsString("approved")
                 );
+                Assert.assertThat(
+                    responseEntity,
+                    StringContains.containsString("staticfree")
+                );
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
