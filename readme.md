@@ -86,6 +86,11 @@ iwillfailyou {
 Where `x.y.z` is actual version from gradle plugins 
 [![Gradle plugin version](https://img.shields.io/maven-metadata/v/https/plugins.gradle.org/m2/com/iwillfailyou/com.iwillfailyou.gradle.plugin/maven-metadata.xml.svg?label=gradle-plugin)](https://plugins.gradle.org/plugin/com.iwillfailyou)
 
+Invoke it:
+```bash
+./gradlew iwillfailyou
+```
+
 ### Maven
 Add the plugin to the `pom.xml`
 ```xml
@@ -106,6 +111,11 @@ Add the plugin to the `pom.xml`
     </staticfree>
   </configuration>
 </plugin>
+```
+
+Invoke it:
+```bash
+mvn iwillfailyou:iwillfailyou
 ```
 
 Where `x.y.z` is actual version from maven central 
