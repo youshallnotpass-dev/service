@@ -4,6 +4,7 @@ import com.iwillfailyou.migrations.Migration0;
 import com.iwillfailyou.migrations.Migration1;
 import com.iwillfailyou.migrations.Migration2;
 import com.iwillfailyou.migrations.Migration3;
+import com.iwillfailyou.migrations.Migration4;
 import com.nikialeksey.jood.Db;
 import com.nikialeksey.jood.JdException;
 import com.nikialeksey.jood.JdMigrations;
@@ -24,9 +25,10 @@ public class IwfyDb implements Db {
                     new Migration0(),
                     new Migration1(),
                     new Migration2(),
-                    new Migration3()
+                    new Migration3(),
+                    new Migration4()
                 ),
-                4
+                5
             )
         );
     }

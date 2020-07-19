@@ -6,6 +6,7 @@ import com.iwillfailyou.inspection.Inspection;
 public interface Repo {
     Inspection nullfree() throws IwfyException;
     Inspection staticfree() throws IwfyException;
+    Inspection allfinal() throws IwfyException;
 
     class Fake implements Repo {
 
@@ -16,6 +17,11 @@ public interface Repo {
 
         @Override
         public Inspection staticfree() throws IwfyException {
+            return new Inspection.Fake();
+        }
+
+        @Override
+        public Inspection allfinal() throws IwfyException {
             return new Inspection.Fake();
         }
     }
