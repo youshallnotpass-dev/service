@@ -267,4 +267,89 @@ public class AppTest {
         });
     }
 
+    @Test
+    public void sendNonfinalDescriptionsWithThreshold() throws Exception {
+        final String user = "user";
+        final String repo = "repo";
+        final Db db = new IwfyDb(new SqliteDb());
+        new FtRemote(new App(new DbRepos(db))).exec((final URI home) -> {
+            try (
+                final CloseableHttpClient httpClient = HttpClients.createDefault()
+            ) {
+                final URL queryUrl = new URL(home.toString() + "/allfinal/" + user + "/" + repo);
+
+                final List<NameValuePair> form = new ArrayList<>();
+                form.add(new BasicNameValuePair("violation", "violation 1"));
+                form.add(new BasicNameValuePair("violation", "violation 2"));
+                form.add(new BasicNameValuePair("threshold", "2"));
+
+                final HttpPost sendDescription = new HttpPost(queryUrl.toURI());
+                sendDescription.setEntity(new UrlEncodedFormEntity(form, Consts.UTF_8));
+                final HttpResponse sendResponse = httpClient.execute(sendDescription);
+                Assert.assertThat(
+                    EntityUtils.toString(sendResponse.getEntity()),
+                    sendResponse.getStatusLine().getStatusCode(),
+                    IsEqual.equalTo(HttpURLConnection.HTTP_OK)
+                );
+
+                final HttpResponse response = httpClient.execute(
+                    new HttpGet(queryUrl.toURI()),
+                    HttpClientContext.create()
+                );
+
+                try (
+                    final QueryResult qr = db.read(
+                        new JdSql(
+                            "SELECT threshold FROM allfinal " +
+                                "WHERE repo = 'user/repo'"
+                        )
+                    )
+                ) {
+                    final ResultSet rs = qr.rs();
+                    Assert.assertThat(rs.next(), IsEqual.equalTo(true));
+                    final int threshold = rs.getInt("threshold");
+                    Assert.assertThat(threshold, IsEqual.equalTo(2));
+                }
+
+                try (
+                    final QueryResult qr = db.read(
+                        new JdSql(
+                            "SELECT description FROM allfinal_violation " +
+                                "WHERE repo = 'user/repo'"
+                        )
+                    )
+                ) {
+                    final ResultSet rs = qr.rs();
+                    Assert.assertThat(rs.next(), IsEqual.equalTo(true));
+                    Assert.assertThat(
+                        rs.getString("description"),
+                        StringContains.containsString("1")
+                    );
+                    Assert.assertThat(rs.next(), IsEqual.equalTo(true));
+                    Assert.assertThat(
+                        rs.getString("description"),
+                        StringContains.containsString("2")
+                    );
+                }
+
+                final String responseEntity = EntityUtils.toString(response.getEntity());
+                Assert.assertThat(
+                    responseEntity,
+                    response.getStatusLine().getStatusCode(),
+                    IsEqual.equalTo(HttpURLConnection.HTTP_OK)
+                );
+                Assert.assertThat(
+                    responseEntity,
+                    StringContains.containsString("approved")
+                );
+                Assert.assertThat(
+                    responseEntity,
+                    StringContains.containsString("allfinal")
+                );
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
 }

@@ -1,18 +1,12 @@
 package com.iwillfailyou;
 
-import com.iwillfailyou.inspection.staticfree.TkStaticfree;
-import com.iwillfailyou.migrations.Migration0;
-import com.iwillfailyou.migrations.Migration1;
-import com.iwillfailyou.migrations.Migration2;
-import com.iwillfailyou.migrations.Migration3;
-import com.iwillfailyou.repo.DbRepos;
+import com.iwillfailyou.inspection.allfinal.TkAllfinal;
 import com.iwillfailyou.inspection.nullfree.TkNullfree;
+import com.iwillfailyou.inspection.staticfree.TkStaticfree;
 import com.iwillfailyou.readme.TkReadme;
+import com.iwillfailyou.repo.DbRepos;
 import com.iwillfailyou.repo.Repos;
-import com.nikialeksey.jood.Db;
 import com.nikialeksey.jood.JdDb;
-import com.nikialeksey.jood.JdMigrations;
-import com.nikialeksey.jood.MigrationsDb;
 import org.cactoos.scalar.Solid;
 import org.takes.Request;
 import org.takes.Response;
@@ -49,9 +43,9 @@ public class App implements Take {
                     new FkRegex(
                         "/nullfree(/)?",
                         new TkReadme(
-                            () -> new URL("https://raw.githubusercontent.com/nikialeksey/nullfree/master/readme.md"),
+                            () -> new URL("https://raw.githubusercontent.com/iwillfailyou/service/master/readme.md"),
                             "Nullfree",
-                            "https://github.com/nikialeksey/nullfree/"
+                            "https://github.com/iwillfailyou/service"
                         )
                     ),
                     new FkRegex(
@@ -68,9 +62,9 @@ public class App implements Take {
                     new FkRegex(
                         "/staticfree(/)?",
                         new TkReadme(
-                            () -> new URL("https://raw.githubusercontent.com/iwillfailyou/java-staticfree/master/readme.md"),
+                            () -> new URL("https://raw.githubusercontent.com/iwillfailyou/service/master/readme.md"),
                             "Staticfree",
-                            "https://github.com/iwillfailyou/java-staticfree/"
+                            "https://github.com/iwillfailyou/service"
                         )
                     ),
                     new FkRegex(
@@ -79,6 +73,25 @@ public class App implements Take {
                             new FkRegex(
                                 "/staticfree/(?<user>[^/]+)/(?<repo>[^/]+)",
                                 new TkStaticfree(
+                                    repos
+                                )
+                            )
+                        )
+                    ),
+                    new FkRegex(
+                        "/allfinal(/)?",
+                        new TkReadme(
+                            () -> new URL("https://raw.githubusercontent.com/iwillfailyou/service/master/readme.md"),
+                            "Staticfree",
+                            "https://github.com/iwillfailyou/service"
+                        )
+                    ),
+                    new FkRegex(
+                        "/allfinal/.+",
+                        new TkFork(
+                            new FkRegex(
+                                "/allfinal/(?<user>[^/]+)/(?<repo>[^/]+)",
+                                new TkAllfinal(
                                     repos
                                 )
                             )

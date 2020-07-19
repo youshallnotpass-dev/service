@@ -2,6 +2,7 @@ package com.iwillfailyou.repo;
 
 import com.iwillfailyou.IwfyException;
 import com.iwillfailyou.inspection.Inspection;
+import com.iwillfailyou.inspection.allfinal.DbAllfinal;
 import com.iwillfailyou.inspection.nullfree.DbNullfree;
 import com.iwillfailyou.inspection.staticfree.DbStaticfree;
 import com.nikialeksey.jood.Db;
@@ -85,6 +86,39 @@ public class DbRepo implements Repo {
         } catch (JdException | SQLException e) {
             throw new IwfyException(
                 "Could not get the staticfree for repo " + path,
+                e
+            );
+        }
+    }
+
+    @Override
+    public Inspection allfinal() throws IwfyException {
+        try (
+            final QueryResult qr = db.read(
+                new JdSql(
+                    "SELECT id FROM allfinal WHERE repo = ?",
+                    new StringArg(path)
+                )
+            )
+        ) {
+            final String id;
+            final ResultSet rs = qr.rs();
+            if (!rs.next()) {
+                id = UUID.randomUUID().toString();
+                db.write(
+                    new JdSql(
+                        "INSERT INTO allfinal (id, repo) VALUES(?, ?)",
+                        new StringArg(id),
+                        new StringArg(path)
+                    )
+                );
+            } else {
+                id = rs.getString("id");
+            }
+            return new DbAllfinal(db, id);
+        } catch (JdException | SQLException e) {
+            throw new IwfyException(
+                "Could not get the allfinal for repo " + path,
                 e
             );
         }

@@ -145,19 +145,22 @@ another one), only composition and type inheritance has been allowed
 6. 🔄 **enumfree** `[in progress]`
 elegant code must not use the `enum`s
 
-7. 🔄 **nomultiplereturn** `[in progress]`
+7. 🔄 **switchfree** `[in progress]`
+elegant code must not use the `switch` blocks/expressions
+
+8. 🔄 **nomultiplereturn** `[in progress]`
 elegant code must contain only one (or no one) return in an any method
 
-8. 🔄 **getterfree** `[in progress]`
+9. 🔄 **getterfree** `[in progress]`
 elegant code must not contain any getters
 
-9. 🔄 **setterfree** `[in progress]`
+10. 🔄 **setterfree** `[in progress]`
 elegant code must not contain any getters
 
-10. 🔄 **privatefree** `[in progress]`
+11. 🔄 **privatefree** `[in progress]`
 elegant code must not use the `private` methods 
 
-11. 🔄 **nopublicmethodnotoverrides** `[in progress]`
+12. 🔄 **nopublicmethodnotoverrides** `[in progress]`
 every public method in the elegant code must be overrided from an interface
 
 ### Nullfree
@@ -179,7 +182,7 @@ Plugin configuration options:
 - `threshold` makes it possible to set the maximum allowed `statics`s in the 
 codebase
 
-Can be suppressed in the code by `@SuppressWarnings("nullfree")`
+Can be suppressed in the code by `@SuppressWarnings("staticfree")`
 
 ## Badges
 If you use iwillfailyou plugin without `offline = true` settings, then you
