@@ -2,7 +2,7 @@ package com.iwillfailyou.inspection;
 
 import com.iwillfailyou.IwfyException;
 
-public class IwfyViolation implements Violation {
+public final class IwfyViolation implements Violation {
 
     private final String description;
 

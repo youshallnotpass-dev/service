@@ -13,7 +13,7 @@ import com.nikialeksey.jood.QueryResult;
 import com.nikialeksey.jood.Transaction;
 import com.nikialeksey.jood.sql.Sql;
 
-public class IwfyDb implements Db {
+public final class IwfyDb implements Db {
 
     private final Db origin;
 

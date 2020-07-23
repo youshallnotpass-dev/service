@@ -15,7 +15,7 @@ import org.takes.misc.Sprintf;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DbAllfinal implements Inspection {
+public final class DbAllfinal implements Inspection {
 
     private final Db db;
     private final String id;
@@ -42,7 +42,7 @@ public class DbAllfinal implements Inspection {
                 );
             }
             return rs.getString("badgeUrl");
-        } catch (SQLException | JdException e) {
+        } catch (final SQLException | JdException e) {
             throw new IwfyException("Can not get the badge.", e);
         }
     }
@@ -79,7 +79,7 @@ public class DbAllfinal implements Inspection {
                     new StringArg(id)
                 )
             );
-        } catch (SQLException | JdException e) {
+        } catch (final SQLException | JdException e) {
             throw new IwfyException(
                 new Sprintf(
                     "Can not calc the badge by allfinal '%s'",
@@ -100,7 +100,7 @@ public class DbAllfinal implements Inspection {
                     new StringArg(id)
                 )
             );
-        } catch (JdException e) {
+        } catch (final JdException e) {
             throw new IwfyException(
                 new Sprintf(
                     "Can not update the threshold in allfinal with id '%s'",
@@ -128,7 +128,7 @@ public class DbAllfinal implements Inspection {
                 );
             }
             return new DbNonfinals(db, rs.getString("repo"));
-        } catch (JdException | SQLException e) {
+        } catch (final JdException | SQLException e) {
             throw new IwfyException(
                 "Could not get the allfinal info by id " + id,
                 e

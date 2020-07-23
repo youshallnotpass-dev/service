@@ -10,11 +10,11 @@ public interface Inspection {
 
     void calcBadge() throws IwfyException;
 
-    void updateThreshold(int threshold) throws IwfyException;
+    void updateThreshold(final int threshold) throws IwfyException;
 
     Violations violations() throws IwfyException;
 
-    class Fake implements Inspection {
+    final class Fake implements Inspection {
 
         private final List<String> badge;
         private final Violations violations;

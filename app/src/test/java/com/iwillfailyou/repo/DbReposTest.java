@@ -18,7 +18,7 @@ import org.hamcrest.core.IsEqual;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class DbReposTest {
+public final class DbReposTest {
 
     @Test
     public void okAfterFourMigration() throws Exception {

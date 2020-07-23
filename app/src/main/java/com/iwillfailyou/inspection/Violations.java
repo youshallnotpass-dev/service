@@ -8,11 +8,11 @@ import java.util.List;
 public interface Violations {
     void clear() throws IwfyException;
 
-    void add(Violation violation) throws IwfyException;
+    void add(final Violation violation) throws IwfyException;
 
     int count() throws IwfyException;
 
-    class Fake implements Violations {
+    final class Fake implements Violations {
         private final List<Violation> violations;
 
         public Fake() {

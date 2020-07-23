@@ -10,14 +10,14 @@ import org.takes.facets.fork.TkRegex;
 import java.io.IOException;
 import java.util.regex.Matcher;
 
-public class TkAllfinal implements TkRegex {
+public final class TkAllfinal implements TkRegex {
 
     private final TkViolation origin;
 
     public TkAllfinal(final Repos repos) {
         this(
             new TkViolation(
-                new IwfyFunc<>(rq -> {
+                new IwfyFunc<>((final RqRegex rq) -> {
                     final Matcher matcher = rq.matcher();
                     final String user = matcher.group("user");
                     final String repo = matcher.group("repo");

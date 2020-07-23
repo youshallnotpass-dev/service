@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import java.sql.ResultSet;
 
-public class Migration3Test {
+public final class Migration3Test {
 
     @Test
     public void okFrom2to3Migration() throws Exception {

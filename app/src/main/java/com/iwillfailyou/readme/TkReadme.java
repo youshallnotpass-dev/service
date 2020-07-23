@@ -23,7 +23,7 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.net.URL;
 
-public class TkReadme implements Take {
+public final class TkReadme implements Take {
 
     private final Parser mdParser;
     private final HtmlRenderer mdRenderer;
@@ -89,8 +89,9 @@ public class TkReadme implements Take {
             final Node document = mdParser.parseReader(urlReader);
             final String html = mdRenderer.render(document);
             final VelocityEngine engine = new VelocityEngine();
-            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-            StringWriter writer = new StringWriter();
+            final ClassLoader classLoader = Thread.currentThread()
+                .getContextClassLoader();
+            final StringWriter writer = new StringWriter();
             engine.evaluate(
                 new VelocityContext(
                     new MapOf<>(

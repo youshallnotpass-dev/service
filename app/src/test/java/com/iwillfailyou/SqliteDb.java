@@ -13,7 +13,7 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class SqliteDb implements Db {
+public final class SqliteDb implements Db {
 
     private final JdDb db;
 
