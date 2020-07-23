@@ -14,7 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
-public class DbStatics implements Violations {
+public final class DbStatics implements Violations {
 
     private final Db db;
     private final String repo;
@@ -39,7 +39,7 @@ public class DbStatics implements Violations {
                     new StringArg(repo)
                 )
             );
-        } catch (JdException e) {
+        } catch (final JdException e) {
             throw new IwfyException(
                 new Sprintf(
                     "Can not clear the statics for repo '%s'",
@@ -62,7 +62,7 @@ public class DbStatics implements Violations {
                     new StringArg(violation.description())
                 )
             );
-        } catch (JdException e) {
+        } catch (final JdException e) {
             throw new IwfyException(
                 new Sprintf(
                     "Can not add the static '%s' in repo '%s'",
@@ -89,7 +89,7 @@ public class DbStatics implements Violations {
                 throw new IwfyException("'SELECT count(*)' returned nothing.");
             }
             return rs.getInt(1);
-        } catch (SQLException | JdException e) {
+        } catch (final SQLException | JdException e) {
             throw new IwfyException("Can not get the statics count.", e);
         }
     }

@@ -6,9 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public interface Repos {
-    Repo repo(String path) throws IwfyException;
+    Repo repo(final String path) throws IwfyException;
 
-    class Fake implements Repos {
+    final class Fake implements Repos {
         private final Map<String, Repo> pathToRepo;
 
         public Fake() {

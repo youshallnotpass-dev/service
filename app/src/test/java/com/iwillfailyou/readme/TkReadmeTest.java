@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 
-public class TkReadmeTest {
+public final class TkReadmeTest {
     @Test
     public void mdReadme() throws Exception {
         Assert.assertThat(

@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.Iterator;
 
-public class TkViolation implements TkRegex {
+public final class TkViolation implements TkRegex {
 
     private final IwfyFunc<RqRegex, Inspection> reqInspection;
 
@@ -50,7 +50,7 @@ public class TkViolation implements TkRegex {
                 }
                 inspection.calcBadge();
                 return new RsWithStatus(new RsWithBody("Saved!\n"), HttpURLConnection.HTTP_OK);
-            } catch (IwfyException e) {
+            } catch (final IwfyException e) {
                 return new RsWithStatus(
                     new RsWithBody(
                         new Sprintf(
@@ -65,7 +65,7 @@ public class TkViolation implements TkRegex {
         } else {
             try {
                 return new RsRedirect(reqInspection.apply(req).badgeUrl());
-            } catch (IwfyException e) {
+            } catch (final IwfyException e) {
                 return new RsWithStatus(
                     new RsWithBody(
                         new Sprintf(

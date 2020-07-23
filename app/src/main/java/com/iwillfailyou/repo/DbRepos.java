@@ -10,7 +10,7 @@ import com.nikialeksey.jood.sql.JdSql;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DbRepos implements Repos {
+public final class DbRepos implements Repos {
 
     private final Db db;
 
@@ -38,7 +38,7 @@ public class DbRepos implements Repos {
                 );
             }
             return new DbRepo(db, path);
-        } catch (JdException | SQLException e) {
+        } catch (final JdException | SQLException e) {
             throw new IwfyException(
                 "Could not get the repo by path " + path,
                 e

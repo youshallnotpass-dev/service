@@ -15,7 +15,7 @@ import org.takes.misc.Sprintf;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DbNullfree implements Inspection {
+public final class DbNullfree implements Inspection {
 
     private final Db db;
     private final String id;
@@ -40,7 +40,7 @@ public class DbNullfree implements Inspection {
                 throw new IwfyException("Nullfree does not contain the repo.");
             }
             return rs.getString("badgeUrl");
-        } catch (SQLException | JdException e) {
+        } catch (final SQLException | JdException e) {
             throw new IwfyException("Can not get the badge.", e);
         }
     }
@@ -77,7 +77,7 @@ public class DbNullfree implements Inspection {
                     new StringArg(id)
                 )
             );
-        } catch (SQLException | JdException e) {
+        } catch (final SQLException | JdException e) {
             throw new IwfyException(
                 new Sprintf(
                     "Can not calc the badge by nullfree '%s'",
@@ -98,7 +98,7 @@ public class DbNullfree implements Inspection {
                     new StringArg(id)
                 )
             );
-        } catch (JdException e) {
+        } catch (final JdException e) {
             throw new IwfyException(
                 new Sprintf(
                     "Can not update the threshold in nullfree with id '%s'",
@@ -126,7 +126,7 @@ public class DbNullfree implements Inspection {
                 );
             }
             return new DbNulls(db, rs.getString("repo"));
-        } catch (JdException | SQLException e) {
+        } catch (final JdException | SQLException e) {
             throw new IwfyException(
                 "Could not get the nullfree info by id " + id,
                 e

@@ -4,7 +4,7 @@ import com.iwillfailyou.Badge;
 import com.iwillfailyou.IwfyException;
 import org.cactoos.Scalar;
 
-public class IwfyBadge implements Badge {
+public final class IwfyBadge implements Badge {
 
     private final String title;
     private final Scalar<Boolean> isGreen;
@@ -19,7 +19,7 @@ public class IwfyBadge implements Badge {
         final boolean green;
         try {
             green = isGreen.value();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             throw new IwfyException(
                 "Could not determine the badge color.",
                 e

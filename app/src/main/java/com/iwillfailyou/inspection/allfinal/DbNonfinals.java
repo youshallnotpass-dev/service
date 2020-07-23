@@ -14,7 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
-public class DbNonfinals implements Violations {
+public final class DbNonfinals implements Violations {
 
     private final Db db;
     private final String repo;
@@ -39,7 +39,7 @@ public class DbNonfinals implements Violations {
                     new StringArg(repo)
                 )
             );
-        } catch (JdException e) {
+        } catch (final JdException e) {
             throw new IwfyException(
                 new Sprintf(
                     "Can not clear the nonfinals for repo '%s'",
@@ -62,7 +62,7 @@ public class DbNonfinals implements Violations {
                     new StringArg(violation.description())
                 )
             );
-        } catch (JdException e) {
+        } catch (final JdException e) {
             throw new IwfyException(
                 new Sprintf(
                     "Can not add the nonfinal '%s' in repo '%s'",
@@ -89,7 +89,7 @@ public class DbNonfinals implements Violations {
                 throw new IwfyException("'SELECT count(*)' returned nothing.");
             }
             return rs.getInt(1);
-        } catch (SQLException | JdException e) {
+        } catch (final SQLException | JdException e) {
             throw new IwfyException("Can not get the nonfinals count.", e);
         }
     }

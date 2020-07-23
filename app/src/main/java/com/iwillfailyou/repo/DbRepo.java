@@ -15,7 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
-public class DbRepo implements Repo {
+public final class DbRepo implements Repo {
 
     private final Db db;
     private final String path;
@@ -50,7 +50,7 @@ public class DbRepo implements Repo {
                 id = rs.getString("id");
             }
             return new DbNullfree(db, id);
-        } catch (JdException | SQLException e) {
+        } catch (final JdException | SQLException e) {
             throw new IwfyException(
                 "Could not get the nullfree for repo " + path,
                 e
@@ -83,7 +83,7 @@ public class DbRepo implements Repo {
                 id = rs.getString("id");
             }
             return new DbStaticfree(db, id);
-        } catch (JdException | SQLException e) {
+        } catch (final JdException | SQLException e) {
             throw new IwfyException(
                 "Could not get the staticfree for repo " + path,
                 e
@@ -116,7 +116,7 @@ public class DbRepo implements Repo {
                 id = rs.getString("id");
             }
             return new DbAllfinal(db, id);
-        } catch (JdException | SQLException e) {
+        } catch (final JdException | SQLException e) {
             throw new IwfyException(
                 "Could not get the allfinal for repo " + path,
                 e

@@ -5,7 +5,7 @@ import com.nikialeksey.jood.JdException;
 import com.nikialeksey.jood.Migration;
 import com.nikialeksey.jood.sql.JdSql;
 
-public class Migration1 implements Migration {
+public final class Migration1 implements Migration {
     @Override
     public int number() {
         return 1;

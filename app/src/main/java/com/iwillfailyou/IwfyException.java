@@ -1,6 +1,6 @@
 package com.iwillfailyou;
 
-public class IwfyException extends Exception {
+public final class IwfyException extends Exception {
 
     public IwfyException(final String message) {
         super(message);

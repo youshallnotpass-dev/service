@@ -34,7 +34,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppTest {
+public final class AppTest {
 
     @Test
     public void checkNullfreeCurrentProject() throws Exception {
@@ -72,7 +72,7 @@ public class AppTest {
                     response.getStatusLine().getStatusCode(),
                     IsEqual.equalTo(HttpURLConnection.HTTP_OK)
                 );
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 throw new RuntimeException(e);
             }
         });
@@ -116,7 +116,7 @@ public class AppTest {
                     responseEntity,
                     StringContains.containsString("declined")
                 );
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 throw new RuntimeException(e);
             }
         });
@@ -153,14 +153,14 @@ public class AppTest {
                 );
 
                 try (
-                    QueryResult qr = db.read(
+                    final QueryResult qr = db.read(
                         new JdSql(
                             "SELECT threshold FROM nullfree " +
                                 "WHERE repo = 'user/repo'"
                         )
                     )
                 ) {
-                    ResultSet rs = qr.rs();
+                    final ResultSet rs = qr.rs();
                     Assert.assertThat(rs.next(), IsEqual.equalTo(true));
                     final int threshold = rs.getInt("threshold");
                     Assert.assertThat(threshold, IsEqual.equalTo(2));
@@ -176,7 +176,7 @@ public class AppTest {
                     responseEntity,
                     StringContains.containsString("approved")
                 );
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 throw new RuntimeException(e);
             }
         });
@@ -205,11 +205,6 @@ public class AppTest {
                     EntityUtils.toString(sendResponse.getEntity()),
                     sendResponse.getStatusLine().getStatusCode(),
                     IsEqual.equalTo(HttpURLConnection.HTTP_OK)
-                );
-
-                final HttpResponse response = httpClient.execute(
-                    new HttpGet(queryUrl.toURI()),
-                    HttpClientContext.create()
                 );
 
                 try (
@@ -247,6 +242,10 @@ public class AppTest {
                     );
                 }
 
+                final HttpResponse response = httpClient.execute(
+                    new HttpGet(queryUrl.toURI()),
+                    HttpClientContext.create()
+                );
                 final String responseEntity = EntityUtils.toString(response.getEntity());
                 Assert.assertThat(
                     responseEntity,
@@ -261,7 +260,7 @@ public class AppTest {
                     responseEntity,
                     StringContains.containsString("staticfree")
                 );
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 throw new RuntimeException(e);
             }
         });
@@ -290,11 +289,6 @@ public class AppTest {
                     EntityUtils.toString(sendResponse.getEntity()),
                     sendResponse.getStatusLine().getStatusCode(),
                     IsEqual.equalTo(HttpURLConnection.HTTP_OK)
-                );
-
-                final HttpResponse response = httpClient.execute(
-                    new HttpGet(queryUrl.toURI()),
-                    HttpClientContext.create()
                 );
 
                 try (
@@ -332,6 +326,10 @@ public class AppTest {
                     );
                 }
 
+                final HttpResponse response = httpClient.execute(
+                    new HttpGet(queryUrl.toURI()),
+                    HttpClientContext.create()
+                );
                 final String responseEntity = EntityUtils.toString(response.getEntity());
                 Assert.assertThat(
                     responseEntity,
@@ -346,7 +344,7 @@ public class AppTest {
                     responseEntity,
                     StringContains.containsString("allfinal")
                 );
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 throw new RuntimeException(e);
             }
         });

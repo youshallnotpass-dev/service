@@ -8,7 +8,7 @@ public interface Repo {
     Inspection staticfree() throws IwfyException;
     Inspection allfinal() throws IwfyException;
 
-    class Fake implements Repo {
+    final class Fake implements Repo {
 
         @Override
         public Inspection nullfree() throws IwfyException {

@@ -24,7 +24,7 @@ import java.io.File;
 import java.net.URL;
 import java.sql.DriverManager;
 
-public class App implements Take {
+public final class App implements Take {
 
     private final Take origin;
 

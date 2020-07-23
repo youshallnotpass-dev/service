@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.Iterator;
 
-public class TkNullfree implements TkRegex {
+public final class TkNullfree implements TkRegex {
 
     private final Repos repos;
 
@@ -54,7 +54,7 @@ public class TkNullfree implements TkRegex {
                 }
                 nullfree.calcBadge();
                 return new RsWithStatus(new RsWithBody("Saved!\n"), HttpURLConnection.HTTP_OK);
-            } catch (IwfyException e) {
+            } catch (final IwfyException e) {
                 return new RsWithStatus(
                     new RsWithBody(
                         new Sprintf(
@@ -69,7 +69,7 @@ public class TkNullfree implements TkRegex {
         } else {
             try {
                 return new RsRedirect(repos.repo(path).nullfree().badgeUrl());
-            } catch (IwfyException e) {
+            } catch (final IwfyException e) {
                 return new RsWithStatus(
                     new RsWithBody(
                         new Sprintf(

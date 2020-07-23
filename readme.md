@@ -4,6 +4,7 @@
 
 ![nullfree status](https://iwillfailyou.com/nullfree/iwillfailyou/service)
 ![staticfree status](https://iwillfailyou.com/staticfree/iwillfailyou/service)
+![allfinal status](https://iwillfailyou.com/allfinal/iwillfailyou/service)
 
 [![Build Status](https://travis-ci.com/iwillfailyou/service.svg?branch=master)](https://travis-ci.com/iwillfailyou/service)
 [![codecov](https://codecov.io/gh/iwillfailyou/service/branch/master/graph/badge.svg)](https://codecov.io/gh/iwillfailyou/service)
@@ -60,6 +61,14 @@ com.example.Words.containsIn(Words.java:20) > words == null
 
 staticfree
 com.example.Words(Words.java:7) > public static final String DELIM = " ,.";
+
+allfinal
+com.example.Words(Words.java:9) > private Collection<String> words;
+com.example.Words.containsIn(Words.java:22) > StringTokenizer tokenizer = new StringTokenizer(text, DELIM)
+com.example.Words.containsIn(Words.java:24) > String nextWord = tokenizer.nextToken()
+com.example.Words(Words.java:15) > Collection<String> words
+com.example.Words.containsIn(Words.java:19) > String text
+com.example.Words(Words.java:6) > public class Words {
 ```
 
 ## Get started
@@ -79,8 +88,11 @@ iwillfailyou {
         threshold = 3 // default 0
     }
     staticfree {
-        threshold = 3 // default 0
+        threshold = 2 // default 0
     }
+    allfinal {
+        threshold = 1 // default 0
+    } 
 }
 ```
 Where `x.y.z` is actual version from gradle plugins 
@@ -107,8 +119,11 @@ Add the plugin to the `pom.xml`
       <threshold>3</threshold><!-- default 0 -->
     </nullfree>
     <staticfree>
-      <threshold>3</threshold><!-- default 0 -->
+      <threshold>2</threshold><!-- default 0 -->
     </staticfree>
+    <allfinal>
+      <threshold>1</threshold><!-- default 0 -->
+    </allfinal>
   </configuration>
 </plugin>
 ```
@@ -131,7 +146,7 @@ elegant code must not use the `null` keywords
 ([Why `static` is bad?](https://www.yegor256.com/2014/05/05/oop-alternative-to-utility-classes.html))
 elegant code must not use the `static` keywords
 
-3. 🔄 **allfinal** `[in progress]`
+3. ✅ [**allfinal**](https://github.com/iwillfailyou/service#allfinal)
 every class, every field, every argument, every local variable must be `final`
 in the elegant code
 
@@ -184,11 +199,20 @@ codebase
 
 Can be suppressed in the code by `@SuppressWarnings("staticfree")`
 
+### Allfinal
+Plugin configuration options:
+- `threshold` makes it possible to set the maximum allowed non `final`s in
+ the codebase
+
+Can be suppressed in the code by `@SuppressWarnings("allfinal")`
+
+
 ## Badges
 If you use iwillfailyou plugin without `offline = true` settings, then you
 can attach the inspection badges to your readme file:
 - `![nullfree status](https://iwillfailyou.com/nullfree/<user>/<repo>)`
 - `![staticfree status](https://iwillfailyou.com/staticfree/<user>/<repo>)`
+- `![allfinal status](https://iwillfailyou.com/allfinal/<user>/<repo>)`
 
 
 ## License
