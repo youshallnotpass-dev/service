@@ -91,6 +91,7 @@ iwillfailyou {
         threshold = 2 // default 0
     }
     allfinal {
+        skipInterfaceMethodParams = false // default true
         threshold = 1 // default 0
     } 
 }
@@ -122,6 +123,7 @@ Add the plugin to the `pom.xml`
       <threshold>2</threshold><!-- default 0 -->
     </staticfree>
     <allfinal>
+      <skipInterfaceMethodParams>false</skipInterfaceMethodParams><!-- default true -->
       <threshold>1</threshold><!-- default 0 -->
     </allfinal>
   </configuration>
@@ -202,7 +204,10 @@ Can be suppressed in the code by `@SuppressWarnings("staticfree")`
 ### Allfinal
 Plugin configuration options:
 - `threshold` makes it possible to set the maximum allowed non `final`s in
- the codebase
+the codebase
+- `skipInterfaceMethodParams` allows restricting or not interface method
+parameter `final`s, by default there is no needed to set `final` for such
+places  
 
 Can be suppressed in the code by `@SuppressWarnings("allfinal")`
 
