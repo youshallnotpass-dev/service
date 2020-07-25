@@ -1,6 +1,7 @@
 package com.iwillfailyou;
 
 import com.iwillfailyou.inspection.allfinal.TkAllfinal;
+import com.iwillfailyou.inspection.allpublic.TkAllpublic;
 import com.iwillfailyou.inspection.nullfree.TkNullfree;
 import com.iwillfailyou.inspection.staticfree.TkStaticfree;
 import com.iwillfailyou.readme.TkReadme;
@@ -82,7 +83,7 @@ public final class App implements Take {
                         "/allfinal(/)?",
                         new TkReadme(
                             () -> new URL("https://raw.githubusercontent.com/iwillfailyou/service/master/readme.md"),
-                            "Staticfree",
+                            "Allfinal",
                             "https://github.com/iwillfailyou/service"
                         )
                     ),
@@ -92,6 +93,25 @@ public final class App implements Take {
                             new FkRegex(
                                 "/allfinal/(?<user>[^/]+)/(?<repo>[^/]+)",
                                 new TkAllfinal(
+                                    repos
+                                )
+                            )
+                        )
+                    ),
+                    new FkRegex(
+                        "/allpublic(/)?",
+                        new TkReadme(
+                            () -> new URL("https://raw.githubusercontent.com/iwillfailyou/service/master/readme.md"),
+                            "Allpublic",
+                            "https://github.com/iwillfailyou/service"
+                        )
+                    ),
+                    new FkRegex(
+                        "/allpublic/.+",
+                        new TkFork(
+                            new FkRegex(
+                                "/allpublic/(?<user>[^/]+)/(?<repo>[^/]+)",
+                                new TkAllpublic(
                                     repos
                                 )
                             )
