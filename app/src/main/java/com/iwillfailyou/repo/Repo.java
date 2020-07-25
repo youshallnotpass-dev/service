@@ -7,6 +7,7 @@ public interface Repo {
     Inspection nullfree() throws IwfyException;
     Inspection staticfree() throws IwfyException;
     Inspection allfinal() throws IwfyException;
+    Inspection allpublic() throws IwfyException;
 
     final class Fake implements Repo {
 
@@ -22,6 +23,11 @@ public interface Repo {
 
         @Override
         public Inspection allfinal() throws IwfyException {
+            return new Inspection.Fake();
+        }
+
+        @Override
+        public Inspection allpublic() throws IwfyException {
             return new Inspection.Fake();
         }
     }
