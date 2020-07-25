@@ -5,6 +5,7 @@
 ![nullfree status](https://iwillfailyou.com/nullfree/iwillfailyou/service)
 ![staticfree status](https://iwillfailyou.com/staticfree/iwillfailyou/service)
 ![allfinal status](https://iwillfailyou.com/allfinal/iwillfailyou/service)
+![allpublic status](https://iwillfailyou.com/allpublic/iwillfailyou/service)
 
 [![Build Status](https://travis-ci.com/iwillfailyou/service.svg?branch=master)](https://travis-ci.com/iwillfailyou/service)
 [![codecov](https://codecov.io/gh/iwillfailyou/service/branch/master/graph/badge.svg)](https://codecov.io/gh/iwillfailyou/service)
@@ -40,7 +41,7 @@ public class Words {
         this.words = words;
     }
 
-    public boolean containsIn(String text) {
+    boolean containsIn(String text) {
         if (words == null) return false;
 
         StringTokenizer tokenizer = new StringTokenizer(text, DELIM);
@@ -69,6 +70,9 @@ com.example.Words.containsIn(Words.java:24) > String nextWord = tokenizer.nextTo
 com.example.Words(Words.java:15) > Collection<String> words
 com.example.Words.containsIn(Words.java:19) > String text
 com.example.Words(Words.java:6) > public class Words {
+
+allpublic
+com.example.Words.containsIn(Words.java:19) > boolean containsIn(String text) {
 ```
 
 ## Get started
@@ -92,7 +96,11 @@ iwillfailyou {
     }
     allfinal {
         skipInterfaceMethodParams = false // default true
+        skipLambdaParams = true // default false
         threshold = 1 // default 0
+    }
+    allpublic {
+        threshold = 4 // default 0
     } 
 }
 ```
@@ -124,8 +132,12 @@ Add the plugin to the `pom.xml`
     </staticfree>
     <allfinal>
       <skipInterfaceMethodParams>false</skipInterfaceMethodParams><!-- default true -->
+      <skipLambdaParams>true</skipLambdaParams><!-- default false -->
       <threshold>1</threshold><!-- default 0 -->
     </allfinal>
+    <allpublic>
+      <threshold>4</threshold><!-- default 0 -->
+    </allpublic>
   </configuration>
 </plugin>
 ```
@@ -174,8 +186,8 @@ elegant code must not contain any getters
 10. 🔄 **setterfree** `[in progress]`
 elegant code must not contain any getters
 
-11. 🔄 **privatefree** `[in progress]`
-elegant code must not use the `private` methods 
+11. ✅ [**allpublic**](https://github.com/iwillfailyou/service#allpublic)
+elegant code must use only `public` methods 
 
 12. 🔄 **nopublicmethodnotoverrides** `[in progress]`
 every public method in the elegant code must be overrided from an interface
@@ -207,9 +219,15 @@ Plugin configuration options:
 the codebase
 - `skipInterfaceMethodParams` allows restricting or not interface method
 parameter `final`s, by default there is no needed to set `final` for such
-places  
+places 
+- `skipLambdaParams` allows skip `final` in lambda parameters, by default
+lambda parameter needs to be `final` 
 
 Can be suppressed in the code by `@SuppressWarnings("allfinal")`
+
+### Allpublic
+- `threshold` makes it possible to set the maximum allowed non `public` methods 
+in the codebase
 
 
 ## Badges
