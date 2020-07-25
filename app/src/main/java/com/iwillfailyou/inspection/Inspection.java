@@ -58,14 +58,13 @@ public interface Inspection {
 
         @Override
         public void calcBadge() throws IwfyException {
+            final String url;
             if (violations.count() > threshold.get(0)) {
-                updateBadge("red");
+                url = "red";
             } else {
-                updateBadge("green");
+                url = "green";
             }
-        }
 
-        private void updateBadge(final String url) {
             if (badge.isEmpty()) {
                 badge.add(url);
             } else {
