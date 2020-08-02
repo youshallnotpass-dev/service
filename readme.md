@@ -88,18 +88,23 @@ plugins {
 iwillfailyou {
     offline = true // default false
     nullfree {
-        skipComparisions = true // default false
+        disabled = true // default false
         threshold = 3 // default 0
+        skipComparisons = true // default false
     }
     staticfree {
+        disabled = true // default false
         threshold = 2 // default 0
     }
     allfinal {
+        disabled = true // default false
+        threshold = 1 // default 0
         skipInterfaceMethodParams = false // default true
         skipLambdaParams = true // default false
-        threshold = 1 // default 0
+        skipCatchParams = true // default false
     }
     allpublic {
+        disabled = true // default false
         threshold = 4 // default 0
     } 
 }
@@ -124,18 +129,23 @@ Add the plugin to the `pom.xml`
   <configuration>
     <offline>true</offline><!-- default false -->
     <nullfree>
-      <skipComparisions>true</skipComparisions><!-- default false -->
+      <disabled>true</disabled><!-- default false -->
       <threshold>3</threshold><!-- default 0 -->
+      <skipComparisons>true</skipComparisons><!-- default false -->
     </nullfree>
     <staticfree>
+      <disabled>true</disabled><!-- default false -->
       <threshold>2</threshold><!-- default 0 -->
     </staticfree>
     <allfinal>
+      <disabled>true</disabled><!-- default false -->
+      <threshold>1</threshold><!-- default 0 -->
       <skipInterfaceMethodParams>false</skipInterfaceMethodParams><!-- default true -->
       <skipLambdaParams>true</skipLambdaParams><!-- default false -->
-      <threshold>1</threshold><!-- default 0 -->
+      <skipCatchParams>true</skipCatchParams><!-- default false -->
     </allfinal>
     <allpublic>
+      <disabled>true</disabled><!-- default false -->
       <threshold>4</threshold><!-- default 0 -->
     </allpublic>
   </configuration>
@@ -194,7 +204,7 @@ every public method in the elegant code must be overrided from an interface
 
 ### Nullfree
 Plugin configuration options:
-- `skipComparisions` allows use `null` in boolean expressions:
+- `skipComparisons` allows use `null` in boolean expressions:
 ```java
 if (some == null) {
     ...
@@ -222,6 +232,8 @@ parameter `final`s, by default there is no needed to set `final` for such
 places 
 - `skipLambdaParams` allows skip `final` in lambda parameters, by default
 lambda parameter needs to be `final` 
+- `skipCatchParams` allows skip `final` in `catch` parameters, by default
+`catch` parameter needs to be `final` 
 
 Can be suppressed in the code by `@SuppressWarnings("allfinal")`
 
@@ -236,6 +248,7 @@ can attach the inspection badges to your readme file:
 - `![nullfree status](https://iwillfailyou.com/nullfree/<user>/<repo>)`
 - `![staticfree status](https://iwillfailyou.com/staticfree/<user>/<repo>)`
 - `![allfinal status](https://iwillfailyou.com/allfinal/<user>/<repo>)`
+- `![allpublic status](https://iwillfailyou.com/allpublic/<user>/<repo>)`
 
 
 ## License
