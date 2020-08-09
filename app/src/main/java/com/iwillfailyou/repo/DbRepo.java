@@ -4,7 +4,9 @@ import com.iwillfailyou.IwfyException;
 import com.iwillfailyou.inspection.Inspection;
 import com.iwillfailyou.inspection.allfinal.DbAllfinal;
 import com.iwillfailyou.inspection.allpublic.DbAllpublic;
+import com.iwillfailyou.inspection.nomultiplereturn.DbNoMultipleReturn;
 import com.iwillfailyou.inspection.nullfree.DbNullfree;
+import com.iwillfailyou.inspection.setterfree.DbSetterFree;
 import com.iwillfailyou.inspection.staticfree.DbStaticfree;
 import com.nikialeksey.jood.Db;
 import com.nikialeksey.jood.JdException;
@@ -153,6 +155,72 @@ public final class DbRepo implements Repo {
         } catch (final JdException | SQLException e) {
             throw new IwfyException(
                 "Could not get the allpublic for repo " + path,
+                e
+            );
+        }
+    }
+
+    @Override
+    public Inspection setterfree() throws IwfyException {
+        try (
+            final QueryResult qr = db.read(
+                new JdSql(
+                    "SELECT id FROM setterfree WHERE repo = ?",
+                    new StringArg(path)
+                )
+            )
+        ) {
+            final String id;
+            final ResultSet rs = qr.rs();
+            if (!rs.next()) {
+                id = UUID.randomUUID().toString();
+                db.write(
+                    new JdSql(
+                        "INSERT INTO setterfree (id, repo) VALUES(?, ?)",
+                        new StringArg(id),
+                        new StringArg(path)
+                    )
+                );
+            } else {
+                id = rs.getString("id");
+            }
+            return new DbSetterFree(db, id);
+        } catch (final JdException | SQLException e) {
+            throw new IwfyException(
+                "Could not get the setterfree for repo " + path,
+                e
+            );
+        }
+    }
+
+    @Override
+    public Inspection nomultiplereturn() throws IwfyException {
+        try (
+            final QueryResult qr = db.read(
+                new JdSql(
+                    "SELECT id FROM nomultiplereturn WHERE repo = ?",
+                    new StringArg(path)
+                )
+            )
+        ) {
+            final String id;
+            final ResultSet rs = qr.rs();
+            if (!rs.next()) {
+                id = UUID.randomUUID().toString();
+                db.write(
+                    new JdSql(
+                        "INSERT INTO nomultiplereturn (id, repo) VALUES(?, ?)",
+                        new StringArg(id),
+                        new StringArg(path)
+                    )
+                );
+            } else {
+                id = rs.getString("id");
+            }
+            return new DbNoMultipleReturn(db, id);
+        } catch (final JdException | SQLException e) {
+            throw new IwfyException(
+                "Could not get the nomultiplereturn for repo " + path,
                 e
             );
         }
