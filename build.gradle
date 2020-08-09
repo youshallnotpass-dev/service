@@ -1,5 +1,11 @@
 plugins {
-    id 'com.iwillfailyou' version '0.1.2'
+    id 'com.iwillfailyou' version '0.4.1'
+}
+
+iwillfailyou {
+    nomultiplereturn {
+        disabled = true
+    }
 }
 
 allprojects {
