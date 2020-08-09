@@ -2,7 +2,9 @@ package com.iwillfailyou;
 
 import com.iwillfailyou.inspection.allfinal.TkAllfinal;
 import com.iwillfailyou.inspection.allpublic.TkAllpublic;
+import com.iwillfailyou.inspection.nomultiplereturn.TkNoMultipleReturn;
 import com.iwillfailyou.inspection.nullfree.TkNullfree;
+import com.iwillfailyou.inspection.setterfree.TkSetterFree;
 import com.iwillfailyou.inspection.staticfree.TkStaticfree;
 import com.iwillfailyou.readme.TkReadme;
 import com.iwillfailyou.repo.DbRepos;
@@ -112,6 +114,46 @@ public final class App implements Take {
                             new FkRegex(
                                 "/allpublic/(?<user>[^/]+)/(?<repo>[^/]+)",
                                 new TkAllpublic(
+                                    repos
+                                )
+                            )
+                        )
+                    ),
+
+                    new FkRegex(
+                        "/nomultiplereturn(/)?",
+                        new TkReadme(
+                            () -> new URL("https://raw.githubusercontent.com/iwillfailyou/service/master/readme.md"),
+                            "NoMultipleReturn",
+                            "https://github.com/iwillfailyou/service"
+                        )
+                    ),
+                    new FkRegex(
+                        "/nomultiplereturn/.+",
+                        new TkFork(
+                            new FkRegex(
+                                "/nomultiplereturn/(?<user>[^/]+)/(?<repo>[^/]+)",
+                                new TkNoMultipleReturn(
+                                    repos
+                                )
+                            )
+                        )
+                    ),
+
+                    new FkRegex(
+                        "/setterfree(/)?",
+                        new TkReadme(
+                            () -> new URL("https://raw.githubusercontent.com/iwillfailyou/service/master/readme.md"),
+                            "SetterFree",
+                            "https://github.com/iwillfailyou/service"
+                        )
+                    ),
+                    new FkRegex(
+                        "/setterfree/.+",
+                        new TkFork(
+                            new FkRegex(
+                                "/setterfree/(?<user>[^/]+)/(?<repo>[^/]+)",
+                                new TkSetterFree(
                                     repos
                                 )
                             )
