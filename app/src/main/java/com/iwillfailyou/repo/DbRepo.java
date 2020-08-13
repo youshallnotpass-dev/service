@@ -4,6 +4,7 @@ import com.iwillfailyou.IwfyException;
 import com.iwillfailyou.inspection.Inspection;
 import com.iwillfailyou.inspection.allfinal.DbAllfinal;
 import com.iwillfailyou.inspection.allpublic.DbAllpublic;
+import com.iwillfailyou.inspection.inheritancefree.DbInheritanceFree;
 import com.iwillfailyou.inspection.nomultiplereturn.DbNoMultipleReturn;
 import com.iwillfailyou.inspection.nullfree.DbNullfree;
 import com.iwillfailyou.inspection.setterfree.DbSetterFree;
@@ -221,6 +222,39 @@ public final class DbRepo implements Repo {
         } catch (final JdException | SQLException e) {
             throw new IwfyException(
                 "Could not get the nomultiplereturn for repo " + path,
+                e
+            );
+        }
+    }
+
+    @Override
+    public Inspection inheritancefree() throws IwfyException {
+        try (
+            final QueryResult qr = db.read(
+                new JdSql(
+                    "SELECT id FROM inheritancefree WHERE repo = ?",
+                    new StringArg(path)
+                )
+            )
+        ) {
+            final String id;
+            final ResultSet rs = qr.rs();
+            if (!rs.next()) {
+                id = UUID.randomUUID().toString();
+                db.write(
+                    new JdSql(
+                        "INSERT INTO inheritancefree (id, repo) VALUES(?, ?)",
+                        new StringArg(id),
+                        new StringArg(path)
+                    )
+                );
+            } else {
+                id = rs.getString("id");
+            }
+            return new DbInheritanceFree(db, id);
+        } catch (final JdException | SQLException e) {
+            throw new IwfyException(
+                "Could not get the inheritancefree for repo " + path,
                 e
             );
         }

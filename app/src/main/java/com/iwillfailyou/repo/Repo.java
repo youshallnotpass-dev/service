@@ -10,6 +10,7 @@ public interface Repo {
     Inspection allpublic() throws IwfyException;
     Inspection setterfree() throws IwfyException;
     Inspection nomultiplereturn() throws IwfyException;
+    Inspection inheritancefree() throws IwfyException;
 
     final class Fake implements Repo {
 
@@ -40,6 +41,11 @@ public interface Repo {
 
         @Override
         public Inspection nomultiplereturn() throws IwfyException {
+            return new Inspection.Fake();
+        }
+
+        @Override
+        public Inspection inheritancefree() throws IwfyException {
             return new Inspection.Fake();
         }
     }

@@ -122,6 +122,10 @@ iwillfailyou {
         disabled = true // default false
         threshold = 6 // default 0
     }
+    inheritancefree {
+        disabled = true // default false
+        threshold = 7 // default 0
+    }
 }
 ```
 Where `x.y.z` is actual version from gradle plugins 
@@ -171,6 +175,10 @@ Add the plugin to the `pom.xml`
       <disabled>true</disabled><!-- default false -->
       <threshold>6</threshold><!-- default 0 -->
     </nomultiplereturn>
+    <inheritancefree>
+      <disabled>true</disabled><!-- default false -->
+      <threshold>7</threshold><!-- default 0 -->
+    </inheritancefree>
   </configuration>
 </plugin>
 ```
@@ -200,7 +208,7 @@ in the elegant code
 4. 🔄 **instanceoffree** `[in progress]`
 elegant code must not use the `instanceof` keywords
 
-5. 🔄 **inheritancefree** `[in progress]`
+5. ✅ [**inheritancefree**](https://github.com/iwillfailyou/service#InheritanceFree)
 elegant code must not use the class inheritance (when one class `extends`
 another one), only composition and type inheritance has been allowed
  
@@ -261,6 +269,8 @@ Can be suppressed in the code by `@SuppressWarnings("setterfree")`
 ### NoMultipleReturn
 Can be suppressed in the code by `@SuppressWarnings("nomultiplereturn")`
 
+### InheritanceFree
+Can be suppressed in the code by `@SuppressWarnings("inheritancefree")`
 
 ## Badges
 If you use iwillfailyou plugin without `offline = true` settings, then you
@@ -271,6 +281,7 @@ can attach the inspection badges to your readme file:
 - `![allpublic status](https://iwillfailyou.com/allpublic/<user>/<repo>)`
 - `![setterfree status](https://iwillfailyou.com/setterfree/<user>/<repo>)`
 - `![nomultiplereturn status](https://iwillfailyou.com/nomultiplereturn/<user>/<repo>)`
+- `![inheritancefree status](https://iwillfailyou.com/inheritancefree/<user>/<repo>)`
 
 
 ## Inspection threshold
