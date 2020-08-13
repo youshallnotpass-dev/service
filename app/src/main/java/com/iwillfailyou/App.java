@@ -2,6 +2,7 @@ package com.iwillfailyou;
 
 import com.iwillfailyou.inspection.allfinal.TkAllfinal;
 import com.iwillfailyou.inspection.allpublic.TkAllpublic;
+import com.iwillfailyou.inspection.inheritancefree.TkInheritanceFree;
 import com.iwillfailyou.inspection.nomultiplereturn.TkNoMultipleReturn;
 import com.iwillfailyou.inspection.nullfree.TkNullfree;
 import com.iwillfailyou.inspection.setterfree.TkSetterFree;
@@ -10,6 +11,9 @@ import com.iwillfailyou.readme.TkReadme;
 import com.iwillfailyou.repo.DbRepos;
 import com.iwillfailyou.repo.Repos;
 import com.nikialeksey.jood.JdDb;
+import java.io.File;
+import java.net.URL;
+import java.sql.DriverManager;
 import org.cactoos.scalar.Solid;
 import org.takes.Request;
 import org.takes.Response;
@@ -22,10 +26,6 @@ import org.takes.facets.fork.TkFork;
 import org.takes.http.Exit;
 import org.takes.http.FtBasic;
 import org.takes.rs.RsText;
-
-import java.io.File;
-import java.net.URL;
-import java.sql.DriverManager;
 
 public final class App implements Take {
 
@@ -154,6 +154,26 @@ public final class App implements Take {
                             new FkRegex(
                                 "/setterfree/(?<user>[^/]+)/(?<repo>[^/]+)",
                                 new TkSetterFree(
+                                    repos
+                                )
+                            )
+                        )
+                    ),
+
+                    new FkRegex(
+                        "/inheritancefree(/)?",
+                        new TkReadme(
+                            () -> new URL("https://raw.githubusercontent.com/iwillfailyou/service/master/readme.md"),
+                            "InheritanceFree",
+                            "https://github.com/iwillfailyou/service"
+                        )
+                    ),
+                    new FkRegex(
+                        "/inheritancefree/.+",
+                        new TkFork(
+                            new FkRegex(
+                                "/inheritancefree/(?<user>[^/]+)/(?<repo>[^/]+)",
+                                new TkInheritanceFree(
                                     repos
                                 )
                             )
