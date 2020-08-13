@@ -11,9 +11,6 @@ import com.iwillfailyou.readme.TkReadme;
 import com.iwillfailyou.repo.DbRepos;
 import com.iwillfailyou.repo.Repos;
 import com.nikialeksey.jood.JdDb;
-import java.io.File;
-import java.net.URL;
-import java.sql.DriverManager;
 import org.cactoos.scalar.Solid;
 import org.takes.Request;
 import org.takes.Response;
@@ -26,6 +23,10 @@ import org.takes.facets.fork.TkFork;
 import org.takes.http.Exit;
 import org.takes.http.FtBasic;
 import org.takes.rs.RsText;
+
+import java.io.File;
+import java.net.URL;
+import java.sql.DriverManager;
 
 public final class App implements Take {
 
