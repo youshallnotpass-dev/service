@@ -1,5 +1,6 @@
 package com.iwillfailyou;
 
+@SuppressWarnings("inheritancefree")
 public final class IwfyException extends Exception {
 
     public IwfyException(final String message) {
