@@ -47,11 +47,24 @@ public final class Migration3 implements Migration {
             )
         );
 
-        db.read( // WTF??? https://github.com/xerial/sqlite-jdbc/issues/497
+        // We can't just rename table with ALTER: https://github.com/xerial/sqlite-jdbc/issues/497
+        db.write(
             new JdSql(
-                "ALTER TABLE repo RENAME TO repo_old"
+                "CREATE TABLE repo_new (" +
+                    "path TEXT NOT NULL PRIMARY KEY" +
+                    ")"
             )
-        ).close();
+        );
+        db.write(
+            new JdSql(
+                "INSERT INTO repo_new(path) SELECT path FROM repo"
+            )
+        );
+        db.write(
+            new JdSql(
+                "DROP TABLE repo"
+            )
+        );
         db.write(
             new JdSql(
                 "CREATE TABLE repo (" +
@@ -61,12 +74,12 @@ public final class Migration3 implements Migration {
         );
         db.write(
             new JdSql(
-                "INSERT INTO repo(path) SELECT path FROM repo_old"
+                "INSERT INTO repo(path) SELECT path FROM repo_new"
             )
         );
         db.write(
             new JdSql(
-                "DROP TABLE repo_old"
+                "DROP TABLE repo_new"
             )
         );
 
