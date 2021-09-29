@@ -18,7 +18,7 @@
     </rollingPolicy>
   </appender>
 
-  <logger name="com.iwillfailyou" level="DEBUG"/>
+  <logger name="dev.youshallnotpass" level="DEBUG"/>
 
   <root level="DEBUG">
     <appender-ref ref="FILE"/>
