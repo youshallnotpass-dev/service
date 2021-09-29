@@ -1,17 +1,14 @@
 plugins {
-    id 'com.iwillfailyou' version '0.5.0'
+    id 'dev.youshallnotpass' version '0.6.1'
 }
 
-iwillfailyou {
-    nomultiplereturn {
-        disabled = true
-    }
+youshallnotpass {
 }
 
 allprojects {
     ext {
-        group = 'com.iwillfailyou'
-        version = '0.2.0'
+        group = 'dev.youshallnotpass'
+        version = '0.3.0'
     }
     repositories {
         mavenCentral()

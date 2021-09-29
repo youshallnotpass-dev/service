@@ -1,23 +1,25 @@
-# Iwillfailyou
+# Youshallnotpass
 
-<img src="https://raw.githubusercontent.com/iwillfailyou/service/master/assets/logo.png" height="200px"/>
+<img src="https://raw.githubusercontent.com/youshallnotpass-dev/service/master/assets/logo.png" height="200px"/>
 
 [![Elegant Objects Respected Here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org/)
 
-![nullfree status](https://iwillfailyou.com/nullfree/iwillfailyou/service)
-![staticfree status](https://iwillfailyou.com/staticfree/iwillfailyou/service)
-![allfinal status](https://iwillfailyou.com/allfinal/iwillfailyou/service)
-![allpublic status](https://iwillfailyou.com/allpublic/iwillfailyou/service)
-![setterfree status](https://iwillfailyou.com/setterfree/iwillfailyou/service)
+![nullfree status](https://youshallnotpass.dev/nullfree/youshallnotpass-dev/service)
+![staticfree status](https://youshallnotpass.dev/staticfree/youshallnotpass-dev/service)
+![allfinal status](https://youshallnotpass.dev/allfinal/youshallnotpass-dev/service)
+![allpublic status](https://youshallnotpass.dev/allpublic/youshallnotpass-dev/service)
+![setterfree status](https://youshallnotpass.dev/setterfree/youshallnotpass-dev/service)
+![nomultiplereturn](https://youshallnotpass.dev/nomultiplereturn/youshallnotpass-dev/service)
+![inheritancefree](https://youshallnotpass.dev/inheritancefree/youshallnotpass-dev/service)
 
-[![Build Status](https://travis-ci.com/iwillfailyou/service.svg?branch=master)](https://travis-ci.com/iwillfailyou/service)
-[![codecov](https://codecov.io/gh/iwillfailyou/service/branch/master/graph/badge.svg)](https://codecov.io/gh/iwillfailyou/service)
+[![Build Status](https://travis-ci.com/youshallnotpass-dev/service.svg?branch=master)](https://travis-ci.com/youshallnotpass-dev/service)
+[![codecov](https://codecov.io/gh/youshallnotpass-dev/service/branch/master/graph/badge.svg)](https://codecov.io/gh/youshallnotpass-dev/service)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/iwillfailyou/service/blob/master/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/youshallnotpass-dev/service/blob/master/LICENSE)
 
 ## What is it?
 
-**Iwillfailyou** is the static analyser for your 
+**Youshallnotpass** is the static analyser for your 
 [elegant](https://www.elegantobjects.org/) code.
 
 ## How it works?
@@ -55,7 +57,7 @@ public class Words {
     }
 }
 ```
-The violations of the **iwillfailyou** analysis:
+The violations of the **youshallnotpass** analysis:
 ```
 nullfree
 com.example.Words(Words.java:12) > null
@@ -88,11 +90,11 @@ com.example.Words.containsIn(Words.java:19)
 Add the plugin to the root `build.gradle`
 ```groovy
 plugins {
-    id 'com.iwillfailyou' version 'x.y.z'
+    id 'dev.youshallnotpass' version 'x.y.z'
 }
 
 // then configure it, if you need:
-iwillfailyou {
+youshallnotpass {
     offline = true // default false
     nullfree {
         disabled = true // default false
@@ -129,19 +131,19 @@ iwillfailyou {
 }
 ```
 Where `x.y.z` is actual version from gradle plugins 
-[![Gradle plugin version](https://img.shields.io/maven-metadata/v/https/plugins.gradle.org/m2/com/iwillfailyou/com.iwillfailyou.gradle.plugin/maven-metadata.xml.svg?label=gradle-plugin)](https://plugins.gradle.org/plugin/com.iwillfailyou)
+[![Gradle plugin version](https://img.shields.io/maven-metadata/v/https/plugins.gradle.org/m2/dev/youshallnotpass/dev.youshallnotpass.gradle.plugin/maven-metadata.xml.svg?label=gradle-plugin)](https://plugins.gradle.org/plugin/dev.youshallnotpass)
 
 Invoke it:
 ```bash
-./gradlew iwillfailyou
+./gradlew youshallnotpass
 ```
 
 ### Maven
 Add the plugin to the `pom.xml`
 ```xml
 <plugin>
-  <groupId>com.iwillfailyou</groupId>
-  <artifactId>iwillfailyou-maven-plugin</artifactId>
+  <groupId>dev.youshallnotpass</groupId>
+  <artifactId>youshallnotpass-maven-plugin</artifactId>
   <version>x.y.z</version>
 
   <!-- then configure it, if you need: -->
@@ -185,30 +187,30 @@ Add the plugin to the `pom.xml`
 
 Invoke it:
 ```bash
-mvn iwillfailyou:iwillfailyou
+mvn youshallnotpass:youshallnotpass
 ```
 
 Where `x.y.z` is actual version from maven central 
-[![Maven plugin version](https://img.shields.io/maven-central/v/com.iwillfailyou/iwillfailyou-maven-plugin.svg?label=maven-plugin)](https://maven-badges.herokuapp.com/maven-central/com.iwillfailyou/iwillfailyou-maven-plugin)
+[![Maven plugin version](https://img.shields.io/maven-central/v/dev.youshallnotpass/youshallnotpass-maven-plugin.svg?label=maven-plugin)](https://maven-badges.herokuapp.com/maven-central/dev.youshallnotpass/youshallnotpass-maven-plugin)
 
 ## Inspections
 
-1. ✅ [**NullFree**](https://github.com/iwillfailyou/service#NullFree) 
+1. ✅ [**NullFree**](https://github.com/youshallnotpass-dev/service#NullFree) 
 ([Why `null` is bad?](https://www.yegor256.com/2014/05/13/why-null-is-bad.html))
 elegant code must not use the `null` keywords
 
-2. ✅ [**StaticFree**](https://github.com/iwillfailyou/service#StaticFree) 
+2. ✅ [**StaticFree**](https://github.com/youshallnotpass-dev/service#StaticFree) 
 ([Why `static` is bad?](https://www.yegor256.com/2014/05/05/oop-alternative-to-utility-classes.html))
 elegant code must not use the `static` keywords
 
-3. ✅ [**AllFinal**](https://github.com/iwillfailyou/service#AllFinal)
+3. ✅ [**AllFinal**](https://github.com/youshallnotpass-dev/service#AllFinal)
 every class, every field, every argument, every local variable must be `final`
 in the elegant code
 
 4. 🔄 **instanceoffree** `[in progress]`
 elegant code must not use the `instanceof` keywords
 
-5. ✅ [**inheritancefree**](https://github.com/iwillfailyou/service#InheritanceFree)
+5. ✅ [**inheritancefree**](https://github.com/youshallnotpass-dev/service#InheritanceFree)
 elegant code must not use the class inheritance (when one class `extends`
 another one), only composition and type inheritance has been allowed
  
@@ -218,16 +220,16 @@ elegant code must not use the `enum`s
 7. 🔄 **switchfree** `[in progress]`
 elegant code must not use the `switch` blocks/expressions
 
-8. ✅ [**NoMultipleReturn**](https://github.com/iwillfailyou/service#NoMultipleReturn)
+8. ✅ [**NoMultipleReturn**](https://github.com/youshallnotpass-dev/service#NoMultipleReturn)
 elegant code must contain only one (or no one) return in an any method
 
 9. 🔄 **getterfree** `[in progress]`
 elegant code must not contain any getters
 
-10. ✅ [**SetterFree**](https://github.com/iwillfailyou/service#SetterFree)
+10. ✅ [**SetterFree**](https://github.com/youshallnotpass-dev/service#SetterFree)
 elegant code must not contain any setters
 
-11. ✅ [**AllPublic**](https://github.com/iwillfailyou/service#AllPublic)
+11. ✅ [**AllPublic**](https://github.com/youshallnotpass-dev/service#AllPublic)
 elegant code must use only `public` methods 
 
 12. 🔄 **nopublicmethodnotoverrides** `[in progress]`
@@ -273,15 +275,15 @@ Can be suppressed in the code by `@SuppressWarnings("nomultiplereturn")`
 Can be suppressed in the code by `@SuppressWarnings("inheritancefree")`
 
 ## Badges
-If you use iwillfailyou plugin without `offline = true` settings, then you
+If you use youshallnotpass plugin without `offline = true` settings, then you
 can attach the inspection badges to your readme file:
-- `![nullfree status](https://iwillfailyou.com/nullfree/<user>/<repo>)`
-- `![staticfree status](https://iwillfailyou.com/staticfree/<user>/<repo>)`
-- `![allfinal status](https://iwillfailyou.com/allfinal/<user>/<repo>)`
-- `![allpublic status](https://iwillfailyou.com/allpublic/<user>/<repo>)`
-- `![setterfree status](https://iwillfailyou.com/setterfree/<user>/<repo>)`
-- `![nomultiplereturn status](https://iwillfailyou.com/nomultiplereturn/<user>/<repo>)`
-- `![inheritancefree status](https://iwillfailyou.com/inheritancefree/<user>/<repo>)`
+- `![nullfree status](https://youshallnotpass.dev/nullfree/<user>/<repo>)`
+- `![staticfree status](https://youshallnotpass.dev/staticfree/<user>/<repo>)`
+- `![allfinal status](https://youshallnotpass.dev/allfinal/<user>/<repo>)`
+- `![allpublic status](https://youshallnotpass.dev/allpublic/<user>/<repo>)`
+- `![setterfree status](https://youshallnotpass.dev/setterfree/<user>/<repo>)`
+- `![nomultiplereturn status](https://youshallnotpass.dev/nomultiplereturn/<user>/<repo>)`
+- `![inheritancefree status](https://youshallnotpass.dev/inheritancefree/<user>/<repo>)`
 
 
 ## Inspection threshold
@@ -289,7 +291,7 @@ Any inspection can be configured with `threshold`:
 
 In `gradle`
 ```groovy
-iwillfailyou {
+youshallnotpass {
     ...
     staticfree {
         threshold = 19
@@ -313,7 +315,7 @@ Any inspection can be disabled by `disabled` settings:
 
 In `gradle`
 ```groovy
-iwillfailyou {
+youshallnotpass {
     ...
     staticfree {
         disabled = true
@@ -338,7 +340,7 @@ There is global `exclude` settings, which can be used for defining exclude
 patterns: 
 In `gradle`
 ```groovy
-iwillfailyou {
+youshallnotpass {
     exclude = ["glob:**/test/**/*Test.java"]
 }
 ```
@@ -368,4 +370,4 @@ In `maven`
 ```
 
 ## License
-[MIT](https://github.com/iwillfailyou/service/blob/master/LICENSE)
+[MIT](https://github.com/youshallnotpass-dev/service/blob/master/LICENSE)
